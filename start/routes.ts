@@ -21,5 +21,8 @@
 import Route from '@ioc:Adonis/Core/Route';
 
 Route.get('/', async ({ view }) => {
-  return view.render('welcome');
+  return view.render('index');
 });
+
+Route.post('/login', 'LoginController.login').as('login');
+Route.get('/dashboard', async () => {}).as('dashboard');
