@@ -1,5 +1,7 @@
 import { DateTime } from 'luxon';
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm';
+import Lesson from './Lesson';
+import User from './User';
 
 export default class Timetable extends BaseModel {
   @column({ isPrimary: true })
@@ -19,6 +21,15 @@ export default class Timetable extends BaseModel {
 
   @column.date()
   public validTo: DateTime | null;
+
+  @column({ serializeAs: null })
+  public ownerId: number;
+
+  @belongsTo(() => User)
+  public owner: BelongsTo<typeof User>;
+
+  @hasMany(() => Lesson)
+  public lessons: HasMany<typeof Lesson>;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

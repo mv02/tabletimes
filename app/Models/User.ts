@@ -19,10 +19,10 @@ export default class User extends BaseModel {
   @column()
   public lastName: string | null;
 
-  @hasMany(() => Subject)
+  @hasMany(() => Subject, { foreignKey: 'ownerId' })
   public subjects: HasMany<typeof Subject>;
 
-  @hasMany(() => Timetable)
+  @hasMany(() => Timetable, { foreignKey: 'ownerId' })
   public timetables: HasMany<typeof Timetable>;
 
   @column.dateTime({ autoCreate: true })

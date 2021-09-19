@@ -10,8 +10,14 @@ export default class Lesson extends BaseModel {
   @column()
   public period: number;
 
+  @column({ serializeAs: null })
+  public subjectId: number;
+
   @belongsTo(() => Subject)
   public subject: BelongsTo<typeof Subject>;
+
+  @column({ serializeAs: null })
+  public timetableId: number;
 
   @belongsTo(() => Timetable)
   public timetable: BelongsTo<typeof Timetable>;

@@ -16,6 +16,9 @@ export default class Subject extends BaseModel {
   @column()
   public color: string;
 
+  @column({ serializeAs: null })
+  public ownerId: number;
+
   @belongsTo(() => User)
   public owner: BelongsTo<typeof User>;
 
