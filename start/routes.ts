@@ -24,5 +24,8 @@ Route.get('/', async ({ view }) => {
   return view.render('index');
 });
 
+Route.get('/login', async ({ response }) => response.redirect('/'));
 Route.post('/login', 'LoginController.login').as('login');
+Route.get('/logout', 'LoginController.logout').as('logout');
+
 Route.get('/dashboard', async () => {}).as('dashboard');
