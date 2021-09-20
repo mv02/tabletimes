@@ -1,0 +1,8 @@
+@layout('layouts/main')
+
+@section('content')
+  <main class="container grid grid-cols-1 gap-6 mx-auto md:pt-0 md:p-4 md:grid-cols-3">
+    @include('partials/dashboard/timetables')
+    @include('partials/dashboard/subjects')
+  </main>
+@endsection

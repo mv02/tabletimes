@@ -28,4 +28,9 @@ Route.get('/login', async ({ response }) => response.redirect('/'));
 Route.post('/login', 'LoginController.login').as('login');
 Route.get('/logout', 'LoginController.logout').as('logout');
 
-Route.get('/dashboard', async () => {}).as('dashboard');
+Route.group(() => {
+  Route.get('/dashboard', 'DashboardController.index').as('dashboard');
+
+  Route.resource('subjects', 'SubjectsController');
+  Route.resource('timetables', 'TimetablesController');
+}).middleware('auth');
