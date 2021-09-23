@@ -7,7 +7,7 @@
   <title>Tabletimes</title>
   @entryPointStyles('app')
 </head>
-<body class="min-h-screen bg-gradient-to-br from-purple-900 via-blue-800 to-blue-600">
+<body class="flex flex-col justify-between min-h-screen bg-gradient-to-br from-purple-900 via-blue-800 to-blue-600">
   <header class="container flex items-center justify-between w-full p-4 mx-auto text-white">
     @if(request.url() === route('dashboard'))
       <h1 class="text-xl font-semibold uppercase">Přehled</h1>
@@ -29,6 +29,8 @@
     </a>
   </header>
 
-  @!section('content')
+  <main class="flex flex-col justify-center flex-grow md:justify-start">
+    @!section('content')
+  </main>
 </body>
 </html>

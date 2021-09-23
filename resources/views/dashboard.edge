@@ -1,8 +1,14 @@
 @layout('layouts/main')
 
 @section('content')
-  <main class="container grid grid-cols-1 gap-6 mx-auto md:pt-0 md:p-4 md:grid-cols-3">
+  <div class="container grid items-start grid-cols-1 gap-6 mx-auto md:px-4 md:pt-0 md:grid-cols-3">
     @include('partials/dashboard/timetables')
     @include('partials/dashboard/subjects')
-  </main>
+  </div>
+
+  <style>
+    main {
+      justify-content: start !important;
+    }
+  </style>
 @endsection
