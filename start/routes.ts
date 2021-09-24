@@ -32,5 +32,5 @@ Route.group(() => {
   Route.get('/dashboard', 'DashboardController.index').as('dashboard');
 
   Route.resource('subjects', 'SubjectsController').except(['index', 'show']);
-  Route.resource('timetables', 'TimetablesController');
+  Route.resource('timetables', 'TimetablesController').except(['index']);
 }).middleware('auth');

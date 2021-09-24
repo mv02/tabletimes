@@ -1,1 +1,7 @@
 @import './tailwind.css';
+
+::-webkit-datetime-edit-fields-wrapper { padding: 0; }
+
+input[type=radio]:checked + label {
+  @apply text-white bg-purple-800 font-semibold;
+}
