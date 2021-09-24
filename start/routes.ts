@@ -31,6 +31,6 @@ Route.get('/logout', 'LoginController.logout').as('logout');
 Route.group(() => {
   Route.get('/dashboard', 'DashboardController.index').as('dashboard');
 
-  Route.resource('subjects', 'SubjectsController');
+  Route.resource('subjects', 'SubjectsController').except(['index', 'show']);
   Route.resource('timetables', 'TimetablesController');
 }).middleware('auth');
