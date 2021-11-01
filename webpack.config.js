@@ -187,6 +187,11 @@ Encore.enablePostCssLoader();
 //   useJsx: false
 // })
 
+Encore.addLoader({
+  test: /\.svelte$/,
+  loader: 'svelte-loader',
+});
+
 /*
 |--------------------------------------------------------------------------
 | Configure logging
