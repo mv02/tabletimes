@@ -36,6 +36,7 @@
     "@adonisjs/session": "^6.1.2",
     "@adonisjs/shield": "^7.0.6",
     "@adonisjs/view": "^6.1.1",
+    "@eidellev/adonis-stardust": "^2.1.0",
     "@eidellev/inertia-adonisjs": "^4.2.2",
     "@inertiajs/inertia": "^0.10.1",
     "@inertiajs/inertia-svelte": "^0.7.4",
