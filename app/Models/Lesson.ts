@@ -8,6 +8,9 @@ export default class Lesson extends BaseModel {
   public id: number;
 
   @column()
+  public day: number;
+
+  @column()
   public period: number;
 
   @column({ serializeAs: null })
