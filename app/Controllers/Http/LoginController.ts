@@ -6,7 +6,7 @@ export default class LoginController {
       await auth.attempt(request.input('email'), request.input('password'));
       return response.redirect().toRoute('dashboard');
     } catch {
-      await session.flash({ error: 'Přihlášení se nezdařilo.' });
+      session.flash({ messages: [{ success: false, text: 'Přihlášení se nezdařilo.' }] });
       return response.redirect().back();
     }
   }

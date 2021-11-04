@@ -19,7 +19,7 @@ export default class Timetable extends BaseModel {
   @column.date()
   public validFrom: DateTime;
 
-  @column.date()
+  @column.date({ serialize: (value: DateTime | null) => value?.toLocaleString() })
   public validTo: DateTime | null;
 
   @column({ serializeAs: null })

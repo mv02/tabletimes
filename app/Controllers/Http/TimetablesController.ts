@@ -3,27 +3,33 @@ import { DateTime } from 'luxon';
 import Timetable from 'App/Models/Timetable';
 
 export default class TimetablesController {
-  public async create({ view }: HttpContextContract) {
-    return await view.render('timetables.create', { now: DateTime.now() });
+  public async create({ inertia }: HttpContextContract) {
+    const now = DateTime.now();
+    return await inertia.render('Timetables/Create', {
+      today: now.toISODate(),
+      endOfYear: now.endOf('year').toISODate(),
+    });
   }
 
   public async store({ auth, request, response, session }: HttpContextContract) {
+    const messages: {}[] = [];
     let timetable;
 
     try {
       timetable = await Timetable.create({
         name: request.input('name'),
-        isPublic: JSON.parse(request.input('is-public')),
-        validFrom: request.input('valid-from'),
-        validTo: request.input('valid-to'),
+        isPublic: request.input('isPublic'),
+        validFrom: request.input('validFrom'),
+        validTo: request.input('validTo'),
         ownerId: auth.user?.id,
       });
 
-      session.flash({ success: true, message: 'Rozvrh byl úspěšně vytvořen.' });
+      messages.push({ success: true, text: 'Rozvrh byl úspěšně vytvořen.' });
     } catch {
-      session.flash({ success: false, message: 'Při vytváření rozvrhu došlo k chybě.' });
+      messages.push({ success: false, text: 'Při vytváření rozvrhu došlo k chybě.' });
     }
 
+    session.flash({ messages: messages });
     return response.redirect().toRoute('timetables.show', { id: timetable.id });
   }
 

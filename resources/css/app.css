@@ -1,7 +1,6 @@
+@import './buttons.css';
 @import './tailwind.css';
 
-::-webkit-datetime-edit-fields-wrapper { padding: 0; }
-
-input[type=radio]:checked + label {
-  @apply text-white bg-purple-800 font-semibold;
+#wrapper {
+  @apply flex flex-col justify-between min-h-screen bg-gradient-to-br from-purple-900 via-blue-800 to-blue-600;
 }

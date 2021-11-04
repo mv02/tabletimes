@@ -2,11 +2,13 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import Subject from 'App/Models/Subject';
 
 export default class SubjectsController {
-  public async create({ view }: HttpContextContract) {
-    return await view.render('subjects.form');
+  public async create({ inertia }: HttpContextContract) {
+    return await inertia.render('Subjects/Index');
   }
 
   public async store({ auth, request, response, session }: HttpContextContract) {
+    const messages: {}[] = [];
+
     try {
       await Subject.create({
         name: request.input('name'),
@@ -15,25 +17,30 @@ export default class SubjectsController {
         ownerId: auth.user?.id,
       });
 
-      session.flash({
+      messages.push({
         success: true,
-        message: `Předmět ${request.input('name').toLowerCase()} vytvořen.`,
+        text: `Předmět ${request.input('name').toLowerCase()} vytvořen.`,
       });
     } catch {
-      session.flash({ success: false, message: 'Při vytváření předmětu došlo k chybě.' });
+      messages.push({
+        success: false,
+        text: 'Při vytváření předmětu došlo k chybě.',
+      });
     }
 
+    session.flash({ messages: messages });
     return await response.redirect().back();
   }
 
-  public async edit({ bouncer, request, view }: HttpContextContract) {
+  public async edit({ bouncer, inertia, request }: HttpContextContract) {
     const subject = await Subject.findOrFail(request.param('id'));
     await bouncer.with('SubjectPolicy').authorize('update', subject);
 
-    return await view.render('subjects.form', { subject: subject });
+    return await inertia.render('Subjects/Index', { subject: subject });
   }
 
   public async update({ bouncer, request, response, session }: HttpContextContract) {
+    let messages: {}[] = [];
     const subject = await Subject.findOrFail(request.param('id'));
     await bouncer.with('SubjectPolicy').authorize('update', subject);
 
@@ -46,11 +53,13 @@ export default class SubjectsController {
         })
         .save();
     } catch {
-      session.flash({ success: false, message: 'Při úpravě předmětu došlo k chybě.' });
+      messages.push({ success: false, text: 'Při úpravě předmětu došlo k chybě.' });
+      session.flash({ messages: messages });
       return await response.redirect().back();
     }
 
-    session.flash({ success: true, message: `Předmět ${subject.name.toLowerCase()} upraven.` });
+    messages.push({ success: true, text: `Předmět ${subject.name.toLowerCase()} upraven.` });
+    session.flash({ messages: messages });
     return await response.redirect().toRoute('dashboard');
   }
 
