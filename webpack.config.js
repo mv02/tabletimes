@@ -191,6 +191,11 @@ Encore.addLoader({
   test: /\.svelte$/,
   loader: 'svelte-loader',
   options: {
+    preprocess: require('svelte-preprocess')({
+      postcss: {
+        plugins: [require('tailwindcss'), require('autoprefixer')],
+      },
+    }),
     onwarn: (warning, handler) => {
       if (warning.code === 'a11y-missing-content') return;
       handler(warning);
