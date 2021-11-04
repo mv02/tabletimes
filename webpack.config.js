@@ -190,6 +190,12 @@ Encore.enablePostCssLoader();
 Encore.addLoader({
   test: /\.svelte$/,
   loader: 'svelte-loader',
+  options: {
+    onwarn: (warning, handler) => {
+      if (warning.code === 'a11y-missing-content') return;
+      handler(warning);
+    },
+  },
 });
 
 /*
