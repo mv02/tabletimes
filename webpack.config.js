@@ -47,6 +47,8 @@ Encore.setPublicPath('/assets');
 */
 Encore.addEntry('app', ['./resources/css/app.css', './resources/ts/app.ts']);
 
+Encore.enableTypeScriptLoader();
+
 /*
 |--------------------------------------------------------------------------
 | Copy assets
