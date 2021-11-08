@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, BelongsTo, belongsTo, column, computed } from '@ioc:Adonis/Lucid/Orm';
 import Subject from './Subject';
 import Timetable from './Timetable';
 
@@ -30,4 +30,9 @@ export default class Lesson extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @computed()
+  public get dayName() {
+    return ['Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek'][this.day - 1];
+  }
 }
