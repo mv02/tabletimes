@@ -16,11 +16,11 @@ export default class Timetable extends BaseModel {
   @column()
   public shareCode: string | null;
 
-  @column.date()
+  @column.date({ serialize: (value: DateTime) => (value.isValid ? value?.toLocaleString() : null) })
   public validFrom: DateTime;
 
-  @column.date({ serialize: (value: DateTime | null) => value?.toLocaleString() })
-  public validTo: DateTime | null;
+  @column.date({ serialize: (value: DateTime) => (value.isValid ? value?.toLocaleString() : null) })
+  public validTo: DateTime;
 
   @column({ serializeAs: null })
   public ownerId: number;
