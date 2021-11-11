@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm';
+import { BaseModel, column, computed, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm';
 import Subject from './Subject';
 import Timetable from './Timetable';
 
@@ -30,4 +30,10 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @computed()
+  public get fullName() {
+    if (this.firstName && this.lastName) return `${this.firstName} ${this.lastName}`;
+    return null;
+  }
 }
