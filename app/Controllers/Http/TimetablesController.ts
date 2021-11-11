@@ -33,7 +33,14 @@ export default class TimetablesController {
     return response.redirect().toRoute('timetables.show', { id: timetable.id });
   }
 
-  public async show({}: HttpContextContract) {}
+  public async show({ bouncer, inertia, request }: HttpContextContract) {
+    const timetable = await Timetable.findOrFail(request.param('id'));
+    await timetable.load('lessons', (query) => query.preload('subject').orderBy(['day', 'period']));
+    await timetable.load('owner');
+    await bouncer.with('TimetablePolicy').authorize('view', timetable);
+
+    return await inertia.render('Timetables/Index', { timetable: timetable });
+  }
 
   public async edit({}: HttpContextContract) {}
 
