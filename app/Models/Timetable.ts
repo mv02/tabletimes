@@ -25,7 +25,7 @@ export default class Timetable extends BaseModel {
   @column({ serializeAs: null })
   public ownerId: number;
 
-  @belongsTo(() => User)
+  @belongsTo(() => User, { foreignKey: 'ownerId' })
   public owner: BelongsTo<typeof User>;
 
   @hasMany(() => Lesson)
