@@ -1,17 +1,4 @@
 {
   "assets/app.css": "http://localhost:8080/assets/app.css",
-  "assets/app.js": "http://localhost:8080/assets/app.js",
-  "assets/resources_ts_Pages_Dashboard_Index_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Dashboard_Index_svelte.js",
-  "assets/resources_ts_Pages_Dashboard_SubjectsList_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Dashboard_SubjectsList_svelte.js",
-  "assets/resources_ts_Pages_Dashboard_SubjectsListItem_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Dashboard_SubjectsListItem_svelte.js",
-  "assets/resources_ts_Shared_Icons_PencilIcon_svelte-resources_ts_Shared_Icons_PlusIcon_svelte.js": "http://localhost:8080/assets/resources_ts_Shared_Icons_PencilIcon_svelte-resources_ts_Shared_Icons_PlusIcon_svelte.js",
-  "assets/resources_ts_Pages_Dashboard_TimetablesListItem_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Dashboard_TimetablesListItem_svelte.js",
-  "assets/resources_ts_Pages_Home_Index_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Home_Index_svelte.js",
-  "assets/resources_ts_Pages_Home_Login_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Home_Login_svelte.js",
-  "assets/resources_ts_Pages_Home_Title_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Home_Title_svelte.js",
-  "assets/resources_ts_Pages_Subjects_Index_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Subjects_Index_svelte.js",
-  "assets/resources_ts_Pages_Timetables_Create_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Timetables_Create_svelte.js",
-  "assets/resources_ts_Shared_FlashMessages_svelte-resources_ts_Shared_Icons_PencilIcon_svelte-resource-66f09a.js": "http://localhost:8080/assets/resources_ts_Shared_FlashMessages_svelte-resources_ts_Shared_Icons_PencilIcon_svelte-resource-66f09a.js",
-  "assets/resources_ts_Shared_Forms_TextInput_svelte.js": "http://localhost:8080/assets/resources_ts_Shared_Forms_TextInput_svelte.js",
-  "assets/resources_ts_Pages_Dashboard_TimetablesList_svelte.js": "http://localhost:8080/assets/resources_ts_Pages_Dashboard_TimetablesList_svelte.js"
+  "assets/app.js": "http://localhost:8080/assets/app.js"
 }
