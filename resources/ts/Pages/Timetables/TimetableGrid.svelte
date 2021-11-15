@@ -1,5 +1,5 @@
 <script>
-  import { getDarkerColor, getTextColor } from '../../utils';
+  import Period from './Period.svelte';
   export let timetable;
   export let selectedLesson;
 
@@ -31,25 +31,7 @@
 >
   {#each table as day}
     {#each day.slice(minPeriod) as period}
-      <div class="flex flex-col gap-1">
-        {#each period as lesson}
-          <div
-            on:mouseenter={() => selectedLesson = lesson}
-            class="flex items-center justify-center flex-grow px-1 border-4 rounded-lg md:p-1 lesson"
-            style="background-color: #{lesson.subject.color}; border-color: {getDarkerColor(lesson.subject.color, 0.8)}"
-          >
-            <h3 class="font-mono text-xl font-semibold uppercase cursor-default" style="color: {getTextColor(lesson.subject.color)}">
-              {lesson.subject.short}
-            </h3>
-          </div>
-        {/each}
-      </div>
+      <Period lessons={period} bind:selectedLesson/>
     {/each}
   {/each}
 </div>
-
-<style>
-  .lesson:hover {
-    filter: brightness(80%);
-  }
-</style>
