@@ -2,6 +2,7 @@
   import { inertia } from '@inertiajs/inertia-svelte';
   import { stardust } from '@eidellev/adonis-stardust';
   import CalendarIcon from '../../Shared/Icons/CalendarIcon.svelte';
+  import CheckCircleIcon from '../../Shared/Icons/CheckCircleIcon.svelte';
   import PencilIcon from '../../Shared/Icons/PencilIcon.svelte';
   import ShareIcon from '../../Shared/Icons/ShareIcon.svelte';
   import UserCircleIcon from '../../Shared/Icons/UserCircleIcon.svelte';
@@ -31,8 +32,16 @@
     <ShareIcon className="w-5 h-5"/>
     <span>Sdílet</span>
   </a>
-  <a use:inertia href={stardust.route('timetables.edit', { id: timetable.id })} class="flex items-center gap-2 px-4 btn-blue">
-    <PencilIcon className="w-5 h-5"/>
-    <span>Upravit</span>
-  </a>
+
+  {#if stardust.isCurrent('timetables.edit')}
+    <a use:inertia href={stardust.route('timetables.show', { id: timetable.id })} class="flex items-center gap-2 px-4 btn-green">
+      <CheckCircleIcon className="w-5 h-5"/>
+      <span>Uložit</span>
+    </a>
+  {:else}
+    <a use:inertia href={stardust.route('timetables.edit', { id: timetable.id })} class="flex items-center gap-2 px-4 btn-blue">
+      <PencilIcon className="w-5 h-5"/>
+      <span>Upravit</span>
+    </a>
+  {/if}
 </div>

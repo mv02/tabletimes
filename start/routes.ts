@@ -31,4 +31,5 @@ Route.group(() => {
 
   Route.resource('subjects', 'SubjectsController').except(['index', 'show']);
   Route.resource('timetables', 'TimetablesController').except(['index']);
+  Route.resource('lessons', 'LessonsController').only(['store', 'update', 'destroy']);
 }).middleware('auth');
