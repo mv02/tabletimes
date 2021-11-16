@@ -30,7 +30,7 @@
 
 <div
   on:mouseleave={() => selectedLesson = null}
-  class="grid gap-1 p-2 gap-y-2 md:gap-y-3 min-w-max"
+  class="grid p-2 gap-y-2 md:gap-y-3 min-w-max"
   style="grid-template-columns: repeat({maxPeriod - minPeriod + 1}, minmax(0, 1fr))"
 >
   {#each table as day, d}

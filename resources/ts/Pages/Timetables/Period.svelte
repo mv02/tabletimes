@@ -40,7 +40,7 @@
   on:dragover|preventDefault={handleDragOver}
   on:dragleave={handleDragLeave}
   on:drop={handleDrop}
-  class="flex flex-col gap-1"
+  class="flex flex-col gap-1 px-0.5"
   data-day={day}
   data-period={period}
 >
