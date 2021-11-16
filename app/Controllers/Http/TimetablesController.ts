@@ -35,7 +35,9 @@ export default class TimetablesController {
 
   public async show({ bouncer, inertia, request }: HttpContextContract) {
     const timetable = await Timetable.findOrFail(request.param('id'));
-    await timetable.load('lessons', (query) => query.preload('subject').orderBy(['day', 'period']));
+    await timetable.load('lessons', (query) => {
+      query.preload('subject').orderBy(['day', 'period', 'id']);
+    });
     await timetable.load('owner');
     await bouncer.with('TimetablePolicy').authorize('view', timetable);
 
@@ -44,7 +46,9 @@ export default class TimetablesController {
 
   public async edit({ auth, bouncer, inertia, request }: HttpContextContract) {
     const timetable = await Timetable.findOrFail(request.param('id'));
-    await timetable.load('lessons', (query) => query.preload('subject').orderBy(['day', 'period']));
+    await timetable.load('lessons', (query) => {
+      query.preload('subject').orderBy(['day', 'period', 'id']);
+    });
     await timetable.load('owner');
     await bouncer.with('TimetablePolicy').authorize('update', timetable);
 
