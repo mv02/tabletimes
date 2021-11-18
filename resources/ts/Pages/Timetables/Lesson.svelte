@@ -8,12 +8,12 @@
 
   function handleDragStart(e) {
     this.classList.add('opacity-50');
-    draggedItem.set(lesson);
+    setTimeout(() => draggedItem.set(lesson), 20);
   }
 
   function handleDragEnd(e) {
     this.classList.remove('opacity-50');
-    draggedItem.set(null);
+    setTimeout(() => draggedItem.set(null), 20);
   }
 </script>
 

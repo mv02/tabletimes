@@ -9,8 +9,8 @@
   {#each subjects as subject}
     <li
       draggable="true"
-      on:dragstart={(e) => draggedItem.set({ subject: subject })}
-      on:dragend={(e) => draggedItem.set(null)}
+      on:dragstart={(e) => setTimeout(() => draggedItem.set({ subject: subject }), 20)}
+      on:dragend={(e) => setTimeout(() => draggedItem.set(null), 20)}
       class="flex flex-grow font-semibold bg-gray-200 rounded-md hover:bg-gray-100"
     >
       <div class="p-2 rounded-l-md" style="background-color: #{subject.color}"></div>
