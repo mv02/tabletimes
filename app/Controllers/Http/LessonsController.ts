@@ -13,5 +13,9 @@ export default class LessonsController {
     return response.redirect().back();
   }
 
-  public async destroy({}: HttpContextContract) {}
+  public async destroy({ request, response }: HttpContextContract) {
+    const lesson = await Lesson.findOrFail(request.param('id'));
+    await lesson.delete();
+    return response.redirect().back();
+  }
 }

@@ -1,9 +1,45 @@
 <script>
+  import { Inertia } from '@inertiajs/inertia';
   import { inertia } from '@inertiajs/inertia-svelte';
   import { stardust } from '@eidellev/adonis-stardust';
+  import { fade } from 'svelte/transition';
   import { draggedItem } from './stores';
+  import TrashIcon from '../../Shared/Icons/TrashIcon.svelte';
   export let subjects;
+
+  function handleDragEnter(e) {
+    this.classList.add('bg-red-800');
+  }
+
+  function handleDragOver(e) {
+    e.dataTransfer.dropEffect = 'move';
+  }
+
+  function handleDragLeave(e) {
+    this.classList.remove('bg-red-800');
+  }
+
+  function handleDrop(e) {
+    Inertia.delete(stardust.route('lessons.destroy', { id: $draggedItem.id }), {
+      preserveScroll: true,
+    });
+  }
 </script>
+
+{#if $draggedItem && $draggedItem.id}
+  <div
+    transition:fade={{ duration: 200 }}
+    on:dragenter={handleDragEnter}
+    on:dragover|preventDefault={handleDragOver}
+    on:dragleave={handleDragLeave}
+    on:drop={handleDrop}
+    class="absolute top-0 left-0 flex items-center justify-center w-full h-full bg-gray-600 bg-opacity-90 rounded-b-md"
+  >
+    <span class="p-2 text-gray-600 bg-gray-200 rounded-full shadow-md pointer-events-none">
+      <TrashIcon className="w-8 h-8"/>
+    </span>
+  </div>
+{/if}
 
 <ul class="flex flex-col flex-wrap items-stretch gap-1 md:flex-row">
   {#each subjects as subject}

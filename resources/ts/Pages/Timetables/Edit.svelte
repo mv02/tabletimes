@@ -19,7 +19,7 @@
         <TimetableGrid {timetable}/>
       </div>
 
-      <div class="p-4 bg-white md:rounded-b-md">
+      <div class="relative p-4 bg-white md:rounded-b-md">
         <SubjectsDeck {subjects}/>
       </div>
     </div>
