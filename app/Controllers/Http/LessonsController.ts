@@ -7,7 +7,11 @@ export default class LessonsController {
     return response.redirect().back();
   }
 
-  public async update({}: HttpContextContract) {}
+  public async update({ request, response }: HttpContextContract) {
+    const lesson = await Lesson.findOrFail(request.param('id'));
+    await lesson.merge(request.all()).save();
+    return response.redirect().back();
+  }
 
   public async destroy({}: HttpContextContract) {}
 }

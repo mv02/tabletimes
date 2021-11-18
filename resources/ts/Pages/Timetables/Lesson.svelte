@@ -5,9 +5,22 @@
   export let lesson;
   export let className = '';
   export let selectedLesson;
+
+  function handleDragStart(e) {
+    this.classList.add('opacity-50');
+    draggedItem.set(lesson);
+  }
+
+  function handleDragEnd(e) {
+    this.classList.remove('opacity-50');
+    draggedItem.set(null);
+  }
 </script>
 
 <div
+  draggable={stardust.isCurrent('timetables.edit')}
+  on:dragstart={handleDragStart}
+  on:dragend={handleDragEnd}
   on:mouseenter={() => selectedLesson = lesson}
   class="flex items-center justify-center flex-grow px-1 border-4 rounded-lg md:p-1 {className}"
   style="background-color: #{lesson.subject.color}; border-color: {getDarkerColor(lesson.subject.color, 0.8)}"
@@ -18,6 +31,10 @@
 </div>
 
 <style>
+  div[draggable=true], div[draggable=true] h3 {
+    cursor: grab;
+  }
+
   div:hover {
     filter: brightness(80%);
   }

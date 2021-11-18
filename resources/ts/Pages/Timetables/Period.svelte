@@ -11,11 +11,13 @@
   let preview;
 
   function handleDragEnter(e) {
+    if (lessons.includes($draggedItem)) return;
     preview = $draggedItem;
   }
 
   function handleDragOver(e) {
-    e.dataTransfer.dropEffect = 'copy';
+    if (lessons.includes($draggedItem)) e.dataTransfer.dropEffect = 'none';
+    else e.dataTransfer.dropEffect = 'copy';
   }
 
   function handleDragLeave(e) {
@@ -23,15 +25,27 @@
   }
 
   function handleDrop(e) {
-    Inertia.post(stardust.route('lessons.store'), {
-      day: this.dataset.day,
-      period: this.dataset.period,
-      subjectId: preview.subject.id,
-      timetableId: timetable.id,
-    }, {
-      onFinish: () => preview = null,
-      preserveScroll: true,
-    });
+    if ($draggedItem.id) {
+      Inertia.patch(stardust.route('lessons.update', { id: $draggedItem.id }), {
+        day: this.dataset.day,
+        period: this.dataset.period,
+      }, {
+        onFinish: () => preview = null,
+        preserveScroll: true,
+      });
+    }
+
+    else {
+      Inertia.post(stardust.route('lessons.store'), {
+        day: this.dataset.day,
+        period: this.dataset.period,
+        subjectId: preview.subject.id,
+        timetableId: timetable.id,
+      }, {
+        onFinish: () => preview = null,
+        preserveScroll: true,
+      });
+    }
   }
 </script>
 
@@ -45,7 +59,7 @@
   data-period={period}
 >
   {#each lessons as lesson}
-    <Lesson {lesson} bind:selectedLesson className={$draggedItem ? 'pointer-events-none' : ''}/>
+    <Lesson {lesson} bind:selectedLesson className={$draggedItem && !lessons.includes($draggedItem) ? 'pointer-events-none' : ''}/>
   {/each}
   {#if preview}
     <Lesson lesson={preview} className="opacity-50 pointer-events-none"/>
