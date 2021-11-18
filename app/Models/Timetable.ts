@@ -1,5 +1,13 @@
 import { DateTime } from 'luxon';
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm';
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  computed,
+  HasMany,
+  hasMany,
+} from '@ioc:Adonis/Lucid/Orm';
 import Lesson from './Lesson';
 import User from './User';
 
@@ -36,4 +44,17 @@ export default class Timetable extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime;
+
+  @computed()
+  public get minPeriod() {
+    for (const lesson of this.lessons) if (lesson.period === 0) return 0;
+    return 1;
+  }
+
+  @computed()
+  public get maxPeriod() {
+    let max = 0;
+    for (const lesson of this.lessons) max = Math.max(max, lesson.period);
+    return max;
+  }
 }
