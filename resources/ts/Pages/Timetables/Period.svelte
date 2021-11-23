@@ -47,6 +47,9 @@
       });
     }
   }
+
+  let isEven;
+  $: isEven = (period % 2 == 0 && day % 2 == 0) || (period % 2 != 0 && day % 2 != 0);
 </script>
 
 <div
@@ -54,7 +57,7 @@
   on:dragover|preventDefault={handleDragOver}
   on:dragleave={handleDragLeave}
   on:drop={handleDrop}
-  class="flex flex-col gap-1 px-0.5 py-1 md:py-1.5"
+  class="flex flex-col gap-1 px-0.5 py-1 md:py-1.5 bg-opacity-10 {isEven && stardust.isCurrent('timetables.edit') ? 'bg-white' : ''}"
   data-day={day}
   data-period={period}
 >
@@ -65,3 +68,9 @@
     <Lesson lesson={preview} className="opacity-50 pointer-events-none"/>
   {/if}
 </div>
+
+<style>
+  div {
+    min-height: 56px;
+  }
+</style>
