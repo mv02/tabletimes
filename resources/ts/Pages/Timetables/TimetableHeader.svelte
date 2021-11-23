@@ -29,14 +29,9 @@
       <UserCircleIcon className="w-6 h-6" />
       <a href="mailto:{timetable.owner.email}">{timetable.owner.fullName ? timetable.owner.fullName : timetable.owner.email}</a>
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 {!timetable.isValid ? 'text-red-500 font-bold' : ''}">
       <CalendarIcon className="w-6 h-6" />
-      <span>
-        {#if timetable.valid_from}
-          <span>{timetable.valid_from} - </span>
-        {/if}
-        <span class={new Date(timetable.valid_to) < new Date() ? 'text-red-500 font-bold' : ''}>{timetable.valid_to}</span>
-      </span>
+      <span>{new Date(timetable.valid_from).toLocaleDateString('cs-CZ')} - {new Date(timetable.valid_to).toLocaleDateString('cs-CZ')}</span>
     </div>
   </div>
 {/if}

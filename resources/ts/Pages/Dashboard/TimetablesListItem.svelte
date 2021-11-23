@@ -19,7 +19,7 @@
       </p>
       <p class="flex items-center gap-1">
         <CalendarIcon className="w-5 h-5"/>
-        <span>{timetable.valid_to}</span>
+        <span>{new Date(timetable.valid_to).toLocaleDateString('cs-CZ')}</span>
       </p>
     </div>
 
