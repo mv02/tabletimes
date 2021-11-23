@@ -42,7 +42,7 @@
 {/if}
 
 <div class="flex gap-3">
-  <a use:inertia href="/" class="flex items-center gap-2 px-4 btn-green">
+  <a use:inertia href="/" class="flex items-center gap-2 px-4 btn-gray">
     <ShareIcon className="w-5 h-5"/>
     <span>Sdílet</span>
   </a>
