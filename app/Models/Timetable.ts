@@ -24,10 +24,10 @@ export default class Timetable extends BaseModel {
   @column()
   public shareCode: string | null;
 
-  @column.date({ serialize: (value: DateTime) => (value.isValid ? value?.toLocaleString() : null) })
+  @column.date({ serialize: (value: DateTime) => (value.isValid ? value?.toISODate() : null) })
   public validFrom: DateTime;
 
-  @column.date({ serialize: (value: DateTime) => (value.isValid ? value?.toLocaleString() : null) })
+  @column.date({ serialize: (value: DateTime) => (value.isValid ? value?.toISODate() : null) })
   public validTo: DateTime;
 
   @column({ serializeAs: null })
