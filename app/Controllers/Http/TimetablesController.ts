@@ -58,7 +58,13 @@ export default class TimetablesController {
     return await inertia.render('Timetables/Edit', { timetable: timetable, subjects: subjects });
   }
 
-  public async update({}: HttpContextContract) {}
+  public async update({ bouncer, request, response }: HttpContextContract) {
+    const timetable = await Timetable.findOrFail(request.param('id'));
+    await bouncer.with('TimetablePolicy').authorize('update', timetable);
+
+    await timetable.merge(request.all()).save();
+    return response.redirect().back();
+  }
 
   public async destroy({}: HttpContextContract) {}
 }

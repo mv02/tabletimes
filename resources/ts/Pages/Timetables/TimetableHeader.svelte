@@ -6,15 +6,29 @@
   import Checkbox from '../../Shared/Forms/Checkbox.svelte';
   import CalendarIcon from '../../Shared/Icons/CalendarIcon.svelte';
   import CheckCircleIcon from '../../Shared/Icons/CheckCircleIcon.svelte';
+  import ChevronDownIcon from '../../Shared/Icons/ChevronDownIcon.svelte';
+  import ChevronUpIcon from '../../Shared/Icons/ChevronUpIcon.svelte';
   import PencilIcon from '../../Shared/Icons/PencilIcon.svelte';
   import ShareIcon from '../../Shared/Icons/ShareIcon.svelte';
   import UserCircleIcon from '../../Shared/Icons/UserCircleIcon.svelte';
   export let timetable;
   export let minPeriod;
   export let maxPeriod;
+  export let editPanelOpen;
 </script>
 
-<h1 class="mb-1 text-3xl text-center uppercase">{timetable.name}</h1>
+<div class="flex gap-3">
+  <h1 class="mb-1 text-3xl text-center uppercase">{timetable.name}</h1>
+  {#if stardust.isCurrent('timetables.edit')}
+    <button on:click={() => editPanelOpen = !editPanelOpen} class="text-gray-600 hover:text-purple-500">
+      {#if !editPanelOpen}
+        <ChevronDownIcon className="w-8 h-8"/>
+      {:else}
+        <ChevronUpIcon className="w-8 h-8"/>
+      {/if}
+    </button>
+  {/if}
+</div>
 
 {#if stardust.isCurrent('timetables.edit')}
   <div class="flex flex-col items-center gap-2 lg:items-end lg:gap-8 lg:flex-row">
@@ -43,10 +57,10 @@
   </a>
 
   {#if stardust.isCurrent('timetables.edit')}
-    <a use:inertia href={stardust.route('timetables.show', { id: timetable.id })} class="flex items-center gap-2 px-4 btn-green">
+    <button form="edit-form" class="flex items-center gap-2 px-4 btn-green">
       <CheckCircleIcon className="w-5 h-5"/>
       <span>Uložit</span>
-    </a>
+    </button>
   {:else}
     <a use:inertia href={stardust.route('timetables.edit', { id: timetable.id })} class="flex items-center gap-2 px-4 btn-blue">
       <PencilIcon className="w-5 h-5"/>
