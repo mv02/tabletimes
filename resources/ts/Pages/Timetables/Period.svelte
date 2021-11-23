@@ -54,7 +54,7 @@
   on:dragover|preventDefault={handleDragOver}
   on:dragleave={handleDragLeave}
   on:drop={handleDrop}
-  class="flex flex-col gap-1 px-0.5"
+  class="flex flex-col gap-1 px-0.5 py-1 md:py-1.5"
   data-day={day}
   data-period={period}
 >
