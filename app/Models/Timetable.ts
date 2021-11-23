@@ -57,4 +57,9 @@ export default class Timetable extends BaseModel {
     for (const lesson of this.lessons) max = Math.max(max, lesson.period);
     return max;
   }
+
+  @computed()
+  public get isValid() {
+    return this.validFrom <= DateTime.now() && this.validTo >= DateTime.now();
+  }
 }
