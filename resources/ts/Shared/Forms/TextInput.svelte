@@ -5,14 +5,18 @@
   export let label;
   export let iconName = 'ArrowNarrowRight';
   const icon = require(`../Icons/${iconName}Icon.svelte`).default;
+  export let error;
 </script>
 
 <div class="flex flex-col flex-grow gap-2">
   {#if label}
      <label for={name} class="text-sm font-semibold uppercase">{label}</label>
   {/if}
-  <div class="flex items-center text-gray-400 bg-gray-200 rounded-md focus-within:text-black ring-purple-800 focus-within:ring-4">
+  <div class="flex items-center text-gray-400 bg-gray-200 rounded-md {error ? 'ring-2 ring-red-500' : ''} focus-within:text-black focus-within:ring-purple-800 focus-within:ring-4">
     <svelte:component this={icon} className="w-5 h-5 m-2"/>
     <input {name} bind:value {size} {...$$restProps} class="flex-grow p-2 text-black bg-transparent focus:outline-none">
   </div>
+  {#if error}
+    <p class="text-sm text-red-500">{@html error}</p>
+  {/if}
 </div>
