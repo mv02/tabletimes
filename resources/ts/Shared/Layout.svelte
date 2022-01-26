@@ -8,7 +8,7 @@
 <div id="wrapper">
   <header class="container flex items-center justify-between w-full p-4 mx-auto text-white">
     {#if stardust.isCurrent('dashboard')}
-      <h1 class="text-xl font-semibold uppercase">Přehled</h1>
+      <h1>Přehled</h1>
     {:else}
       <a use:inertia href={stardust.route('dashboard')} class="flex items-center gap-2 group">
         <ArrowCircleLeftIcon className="w-8 h-8"/>

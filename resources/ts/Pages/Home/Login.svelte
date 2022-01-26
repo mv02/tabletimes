@@ -14,15 +14,17 @@
   }
 </script>
 
-<form on:submit|preventDefault={submit} class="flex flex-col w-full gap-5 p-6 bg-white md:rounded-md md:w-auto">
-  <h1 class="text-xl font-semibold uppercase">Vstup</h1>
-
-  <FlashMessages messages={$page.props.messages}/>
-
-  <TextInput type="email" name="email" bind:value={$form.email} placeholder="E-mail" required iconName="Mail"/>
-  <TextInput type="password" name="password" bind:value={$form.password} placeholder="Heslo" required iconName="Key"/>
-
-  <div class="flex justify-center">
-    <input type="submit" value="Přihlásit se" class="w-1/2 btn-blue">
-  </div>
-</form>
+<section>
+  <form on:submit|preventDefault={submit}>
+    <h1>Vstup</h1>
+  
+    <FlashMessages messages={$page.props.messages}/>
+  
+    <TextInput type="email" name="email" bind:value={$form.email} placeholder="E-mail" required iconName="Mail"/>
+    <TextInput type="password" name="password" bind:value={$form.password} placeholder="Heslo" required iconName="Key"/>
+  
+    <div class="flex justify-center">
+      <input type="submit" value="Přihlásit se" class="w-1/2 btn-blue">
+    </div>
+  </form>
+</section>

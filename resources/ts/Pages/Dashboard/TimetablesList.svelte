@@ -6,7 +6,7 @@
   export let timetables;
 </script>
 
-<section class="px-4 md:px-0 md:col-span-2">
+<section class="px-4 py-0 bg-transparent md:px-0 md:col-span-2">
   <ul class="flex flex-wrap items-center justify-center gap-4 md:justify-start">
     {#each timetables as timetable}
       <TimetablesListItem {timetable}/>

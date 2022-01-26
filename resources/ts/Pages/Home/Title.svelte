@@ -3,10 +3,10 @@
   export let count;
 </script>
 
-<section class="flex flex-col gap-10">
+<section class="flex flex-col gap-10 bg-transparent">
   <div class="flex flex-col items-center gap-2">
     <CalendarOutlineIcon className="w-12 h-12 text-gray-300"/>
-    <h1 class="font-sans text-5xl font-semibold text-white uppercase">Tabletimes</h1>
+    <h1 class="text-5xl text-white">Tabletimes</h1>
   </div>
 
   <div class="flex flex-row justify-between gap-5">

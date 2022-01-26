@@ -24,7 +24,7 @@
   }
 </script>
 
-<form on:submit|preventDefault={submit} id="edit-form" class="flex flex-col justify-center gap-5 md:flex-row">
+<form on:submit|preventDefault={submit} id="edit-form" class="justify-center md:flex-row">
   <div>
     <TextInput label="Název" name="name" bind:value={$form.name} placeholder="Třída 3.B" maxlength="50" required autocomplete="off"/>
   </div>

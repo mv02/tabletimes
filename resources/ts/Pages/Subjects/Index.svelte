@@ -21,22 +21,24 @@
 
 <Layout>
   <div class="container flex items-center justify-center flex-grow mx-auto md:p-4">
-    <form on:submit|preventDefault={submit} class="flex flex-col w-full gap-5 p-6 bg-white md:w-auto md:rounded-md">
-      <h1 class="text-xl font-semibold uppercase">{stardust.isCurrent('subjects.create') ? 'Nový předmět' : `Upravit ${subject.short}`}</h1>
-
-      <FlashMessages messages={$page.props.messages}/>
-
-      <hr>
-
-      <TextInput label="Název" name="name" bind:value={$form.name} placeholder="Český jazyk a literatura" maxlength="30" required autocomplete="off"/>
-      <div class="flex gap-5">
-        <TextInput label="Zkratka" name="short" bind:value={$form.short} placeholder="čjl" size="5" maxlength="10" required autocomplete="off" iconName="Tag"/>
-        <ColorInput label="Barva" name="color" bind:value={$form.color} required/>
-      </div>
-
-      <div class="flex justify-center">
-        <input type="submit" value="Uložit" class="w-1/2 btn-blue">
-      </div>
-    </form>
+    <section>
+      <form on:submit|preventDefault={submit}>
+        <h1>{stardust.isCurrent('subjects.create') ? 'Nový předmět' : `Upravit ${subject.short}`}</h1>
+  
+        <FlashMessages messages={$page.props.messages}/>
+  
+        <hr>
+  
+        <TextInput label="Název" name="name" bind:value={$form.name} placeholder="Český jazyk a literatura" maxlength="30" required autocomplete="off"/>
+        <div class="flex gap-5">
+          <TextInput label="Zkratka" name="short" bind:value={$form.short} placeholder="čjl" size="5" maxlength="10" required autocomplete="off" iconName="Tag"/>
+          <ColorInput label="Barva" name="color" bind:value={$form.color} required/>
+        </div>
+  
+        <div class="flex justify-center">
+          <input type="submit" value="Uložit" class="w-1/2 btn-blue">
+        </div>
+      </form>
+    </section>
   </div>
 </Layout>

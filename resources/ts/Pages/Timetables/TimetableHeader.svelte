@@ -18,7 +18,7 @@
 </script>
 
 <div class="flex gap-3">
-  <h1 class="mb-1 text-3xl text-center uppercase">{timetable.name}</h1>
+  <h1 class="mb-1 text-3xl font-normal text-center">{timetable.name}</h1>
   {#if stardust.isCurrent('timetables.edit')}
     <button on:click={() => editPanelOpen = !editPanelOpen} class="text-gray-600 hover:text-purple-500">
       {#if !editPanelOpen}

@@ -7,8 +7,8 @@
   export let subjects;
 </script>
 
-<section class="flex flex-col w-full gap-5 p-6 bg-white md:w-auto md:rounded-md">
-  <h1 class="text-xl font-semibold uppercase">Předměty</h1>
+<section>
+  <h1>Předměty</h1>
 
   <FlashMessages messages={$page.props.messages}/>
 
