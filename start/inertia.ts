@@ -17,4 +17,7 @@ Inertia.share({
   messages: (ctx) => {
     return ctx.session.flashMessages.get('messages') || [];
   },
+  user: (ctx) => {
+    return ctx.auth?.user;
+  },
 }).version(() => Inertia.manifestFile('public/assets/manifest.json'));
