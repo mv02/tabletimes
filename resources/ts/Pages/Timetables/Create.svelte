@@ -4,7 +4,7 @@
   import Layout from '../../Shared/Layout.svelte';
   import FlashMessages from '../../Shared/FlashMessages.svelte';
   import TextInput from '../../Shared/Forms/TextInput.svelte';
-  import BooleanInput from '../../Shared/Forms/BooleanInput.svelte';
+  import RadioInput from '../../Shared/Forms/RadioInput.svelte';
   import DateInput from '../../Shared/Forms/DateInput.svelte';
   export let today;
   export let endOfYear;
@@ -33,7 +33,15 @@
       <div class="flex flex-col gap-5 sm:flex-row">
         <div class="flex flex-col flex-grow gap-5">
           <TextInput label="Název" name="name" bind:value={$form.name} placeholder="Třída 3.B" maxlength="50" required autocomplete="off"/>
-          <BooleanInput label="Viditelnost" name="is-public" bind:checked={$form.isPublic} ids={['private', 'public']} options={['Soukromý', 'Veřejný']} iconNames={['LockClosed', 'Eye']}/>
+          <RadioInput
+            label="Viditelnost"
+            name="is-public"
+            bind:checked={$form.isPublic}
+            labels={['Soukromý', 'Veřejný']}
+            ids={['private', 'public']}
+            values={[false, true]}
+            iconNames={['LockClosed', 'Eye']}
+          />
         </div>
 
         <div class="flex flex-col flex-grow gap-5">
