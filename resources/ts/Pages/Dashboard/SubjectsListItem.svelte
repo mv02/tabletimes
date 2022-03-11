@@ -13,13 +13,12 @@
     <span class="ml-1 text-sm text-gray-400">{subject.short}</span>
   </div>
 
-  <div class="flex gap-2 p-2 md:opacity-0 md:group-hover:opacity-100">
-    <a use:inertia href={stardust.route('subjects.edit', { id: subject.id })} class="flex">
-      <button class="hover:text-purple-800">
-        <PencilIcon className="w-5 h-5"/>
-      </button>
+  <div class="flex items-center p-2 text-gray-600 gap-2 lg:opacity-0 lg:group-hover:opacity-100">
+    <a use:inertia href={stardust.route('subjects.edit', { id: subject.id })} class="hover:text-purple-600" title="Upravit předmět">
+      <PencilIcon className="w-5 h-5"/>
     </a>
-    <button class="hover:text-red-500">
+
+    <button class="hover:text-red-500" title="Odstranit předmět">
       <TrashIcon className="w-5 h-5"/>
     </button>
   </div>

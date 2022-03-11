@@ -6,15 +6,18 @@
   export let timetables;
 </script>
 
-<section class="px-4 py-0 bg-transparent md:px-0 md:col-span-2">
-  <ul class="flex flex-wrap items-center justify-center gap-4 md:justify-start">
+<section class="max-h-full min-h-0 py-0 bg-transparent md:px-0">
+  <ul class="flex flex-col px-1 overflow-y-auto gap-4 md:justify-start">
     {#each timetables as timetable}
       <TimetablesListItem {timetable}/>
     {/each}
 
-    <li class="relative p-2 bg-white rounded-md hover:bg-blue-600 hover:text-white">
-      <a use:inertia href={stardust.route('timetables.create')} class="absolute top-0 left-0 w-full h-full"></a>
-      <PlusIcon className="w-8 h-8"/>
-    </li>
+    {#if timetables.length === 0}
+      <p class="font-semibold text-white">Nenalezeny žádné rozvrhy</p>
+    {/if}
+
+    <a use:inertia href={stardust.route('timetables.create')} class="flex justify-center p-2 bg-white rounded-md hover:text-white hover:bg-purple-600">
+      <PlusIcon className="w-6 h-6"/>
+    </a>
   </ul>
 </section>

@@ -28,6 +28,7 @@ Route.get('/logout', 'LoginController.logout').as('logout');
 
 Route.group(() => {
   Route.get('/dashboard', 'DashboardController.index').as('dashboard');
+  Route.post('/settings', 'DashboardController.saveSettings').as('settings');
 
   Route.resource('subjects', 'SubjectsController').except(['index', 'show']);
   Route.resource('timetables', 'TimetablesController').except(['index']);
