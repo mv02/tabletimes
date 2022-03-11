@@ -8,7 +8,7 @@
   const icon = require(`../Icons/${iconName}Icon.svelte`).default;
 </script>
 
-<div class="flex flex-col flex-grow gap-2">
+<div class="flex flex-col flex-grow gap-1">
   <div class="flex items-center justify-between">
     {#if label}
        <label for={name} class="text-sm font-semibold uppercase">{label}</label>
