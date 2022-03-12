@@ -23,8 +23,8 @@ import Route from '@ioc:Adonis/Core/Route';
 Route.inertia('/', 'Home/Index');
 
 Route.get('/login', async ({ response }) => response.redirect('/'));
-Route.post('/login', 'LoginController.login').as('login');
-Route.get('/logout', 'LoginController.logout').as('logout');
+Route.post('/login', 'AuthController.login').as('login');
+Route.get('/logout', 'AuthController.logout').as('logout');
 
 Route.group(() => {
   Route.get('/dashboard', 'DashboardController.index').as('dashboard');
