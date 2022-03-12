@@ -7,8 +7,6 @@ export default class SubjectsController {
   }
 
   public async store({ auth, request, response, session }: HttpContextContract) {
-    const messages: {}[] = [];
-
     try {
       await Subject.create({
         name: request.input('name'),
@@ -17,18 +15,11 @@ export default class SubjectsController {
         ownerId: auth.user?.id,
       });
 
-      messages.push({
-        success: true,
-        text: `Předmět ${request.input('name').toLowerCase()} vytvořen.`,
-      });
+      session.flash({ messages: [`Předmět ${request.input('name').toLowerCase()} vytvořen.`] });
     } catch {
-      messages.push({
-        success: false,
-        text: 'Při vytváření předmětu došlo k chybě.',
-      });
+      session.flash({ errors: ['Při vytváření předmětu došlo k chybě.'] });
     }
 
-    session.flash({ messages: messages });
     return await response.redirect().back();
   }
 
@@ -40,7 +31,6 @@ export default class SubjectsController {
   }
 
   public async update({ bouncer, request, response, session }: HttpContextContract) {
-    let messages: {}[] = [];
     const subject = await Subject.findOrFail(request.param('id'));
     await bouncer.with('SubjectPolicy').authorize('update', subject);
 
@@ -53,13 +43,11 @@ export default class SubjectsController {
         })
         .save();
     } catch {
-      messages.push({ success: false, text: 'Při úpravě předmětu došlo k chybě.' });
-      session.flash({ messages: messages });
+      session.flash({ errors: ['Při úpravě předmětu došlo k chybě.'] });
       return await response.redirect().back();
     }
 
-    messages.push({ success: true, text: `Předmět ${subject.name.toLowerCase()} upraven.` });
-    session.flash({ messages: messages });
+    session.flash({ messages: [`Předmět ${subject.name.toLowerCase()} upraven.`] });
     return await response.redirect().toRoute('dashboard');
   }
 

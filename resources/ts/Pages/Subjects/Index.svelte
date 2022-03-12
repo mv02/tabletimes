@@ -24,7 +24,7 @@
     <form on:submit|preventDefault={submit}>
       <h1>{stardust.isCurrent('subjects.create') ? 'Nový předmět' : `Upravit ${subject.short}`}</h1>
 
-      <FlashMessages messages={$page.props.messages}/>
+      <FlashMessages errors={$page.props.errors} messages={$page.props.messages}/>
 
       <hr>
 

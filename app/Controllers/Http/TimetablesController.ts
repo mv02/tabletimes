@@ -12,7 +12,6 @@ export default class TimetablesController {
   }
 
   public async store({ auth, request, response, session }: HttpContextContract) {
-    const messages: {}[] = [];
     let timetable;
 
     try {
@@ -24,12 +23,11 @@ export default class TimetablesController {
         ownerId: auth.user?.id,
       });
 
-      messages.push({ success: true, text: 'Rozvrh byl úspěšně vytvořen.' });
+      session.flash({ messages: ['Rozvrh byl úspěšně vytvořen.'] });
     } catch {
-      messages.push({ success: false, text: 'Při vytváření rozvrhu došlo k chybě.' });
+      session.flash({ errors: ['Při vytváření rozvrhu došlo k chybě.'] });
     }
 
-    session.flash({ messages: messages });
     return response.redirect().toRoute('timetables.show', { id: timetable.id });
   }
 

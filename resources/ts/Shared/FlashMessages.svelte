@@ -1,16 +1,24 @@
 <script>
   import CheckCircleIcon from "./Icons/CheckCircleIcon.svelte";
   import ExclamationIcon from "./Icons/ExclamationIcon.svelte";
-  export let messages;
+  export let errors = [];
+  export let messages = [];
 </script>
 
-{#each messages as message}
-  <p class="flex items-center gap-2 font-semibold {message.success ? 'text-green-500' : 'text-red-500'}">
-    {#if message.success}
-      <CheckCircleIcon className="w-5 h-5"/>
-    {:else}
-      <ExclamationIcon className="w-5 h-5"/>
-    {/if}
-    <span>{message.text}</span>
-  </p>
-{/each}
+{#if errors.length > 0 || messages.length > 0}
+  <div>
+    {#each errors as error}
+      <p class="flex items-center text-red-500 gap-2">
+        <ExclamationIcon className="w-5 h-5"/>
+        <span>{error}</span>
+      </p>
+    {/each}
+    
+    {#each messages as message}
+      <p class="flex items-center text-green-500 gap-2">
+        <CheckCircleIcon className="w-5 h-5"/>
+        <span>{message}</span>
+      </p>
+    {/each}
+  </div>
+{/if}

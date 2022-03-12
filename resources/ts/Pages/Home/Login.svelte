@@ -18,7 +18,7 @@
   <form on:submit|preventDefault={submit}>
     <h1>Vstup</h1>
   
-    <FlashMessages messages={$page.props.messages}/>
+    <FlashMessages errors={$page.props.errors}/>
   
     <TextInput type="email" name="email" bind:value={$form.email} placeholder="E-mail" required iconName="Mail"/>
     <TextInput type="password" name="password" bind:value={$form.password} placeholder="Heslo" required iconName="Key"/>
