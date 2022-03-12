@@ -35,7 +35,8 @@
     "@adonisjs/auth",
     "@adonisjs/bouncer",
     "@eidellev/inertia-adonisjs",
-    "@eidellev/adonis-stardust"
+    "@eidellev/adonis-stardust",
+    "@adonisjs/ally"
   ],
   "metaFiles": [
     {
