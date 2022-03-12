@@ -7,6 +7,8 @@ import {
   computed,
   HasMany,
   hasMany,
+  ManyToMany,
+  manyToMany,
 } from '@ioc:Adonis/Lucid/Orm';
 import Lesson from './Lesson';
 import User from './User';
@@ -35,6 +37,9 @@ export default class Timetable extends BaseModel {
 
   @belongsTo(() => User, { foreignKey: 'ownerId' })
   public owner: BelongsTo<typeof User>;
+
+  @manyToMany(() => User)
+  public usersWithAccess: ManyToMany<typeof User>;
 
   @hasMany(() => Lesson)
   public lessons: HasMany<typeof Lesson>;

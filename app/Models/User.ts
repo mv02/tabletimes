@@ -1,5 +1,14 @@
 import { DateTime } from 'luxon';
-import { BaseModel, beforeSave, column, computed, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm';
+import {
+  BaseModel,
+  beforeSave,
+  column,
+  computed,
+  HasMany,
+  hasMany,
+  ManyToMany,
+  manyToMany,
+} from '@ioc:Adonis/Lucid/Orm';
 import Subject from './Subject';
 import Timetable from './Timetable';
 import Hash from '@ioc:Adonis/Core/Hash';
@@ -25,6 +34,14 @@ export default class User extends BaseModel {
 
   @hasMany(() => Timetable, { foreignKey: 'ownerId' })
   public timetables: HasMany<typeof Timetable>;
+
+  @manyToMany(() => Timetable)
+  public sharedTimetables: ManyToMany<typeof Timetable>;
+
+  @computed()
+  public get allTimetables() {
+    return [...(this.timetables ?? []), ...(this.sharedTimetables ?? [])];
+  }
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;
