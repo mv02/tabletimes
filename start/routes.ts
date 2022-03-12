@@ -26,7 +26,9 @@ Route.group(() => {
   Route.get('/', ({ inertia }) => inertia.render('Home/Index')).as('login');
   Route.post('/callback', 'AuthController.login').as('login.callback');
   Route.get('/google', 'AuthController.googleRedirect').as('google');
+  Route.get('/google/callback', 'AuthController.googleCallback');
   Route.get('/facebook', 'AuthController.facebookRedirect').as('facebook');
+  Route.get('/facebook/callback', 'AuthController.facebookCallback');
 }).prefix('/login');
 
 Route.get('/register', ({ inertia }) => inertia.render('Home/Index')).as('register');

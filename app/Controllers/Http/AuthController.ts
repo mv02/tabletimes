@@ -24,16 +24,47 @@ export default class AuthController {
     return ctx.response.redirect().toRoute('dashboard');
   }
 
+  public async googleRedirect({ ally }: HttpContextContract) {
+    return await ally.use('google').redirect();
+  }
+
+  public async googleCallback(ctx: HttpContextContract) {
+    const googleUser = await ctx.ally.use('google').user();
+    await this.loginOrCreateUser(ctx, {
+      email: googleUser.email as string,
+      firstName: googleUser.original.given_name,
+      lastName: googleUser.original.family_name,
+    });
+    return ctx.response.redirect().toRoute('dashboard');
+  }
+
+  public async facebookRedirect({ ally }: HttpContextContract) {
+    return await ally.use('facebook').redirect();
+  }
+
+  public async facebookCallback(ctx: HttpContextContract) {
+    const facebookUser = await ctx.ally.use('facebook').user();
+    await this.loginOrCreateUser(ctx, {
+      email: facebookUser.email as string,
+      firstName: facebookUser.original.first_name,
+      lastName: facebookUser.original.last_name,
+    });
+    return ctx.response.redirect().toRoute('dashboard');
+  }
+
   private async loginOrCreateUser(
     { auth }: HttpContextContract,
     userData: { email: string; password?: string; firstName?: string; lastName?: string }
   ) {
+    if (userData.password) return await auth.attempt(userData.email, userData.password);
+
+    let user: User;
     try {
-      await auth.attempt(userData.email, userData.password ?? '');
+      user = await User.findByOrFail('email', userData.email);
     } catch {
-      const user = await User.create(userData);
-      await auth.login(user);
+      user = await User.create(userData);
     }
+    await auth.login(user);
   }
 
   public async logout({ auth, response }: HttpContextContract) {
