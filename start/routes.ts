@@ -22,8 +22,15 @@ import Route from '@ioc:Adonis/Core/Route';
 
 Route.inertia('/', 'Home/Index');
 
-Route.get('/login', async ({ response }) => response.redirect('/'));
-Route.post('/login', 'AuthController.login').as('login');
+Route.group(() => {
+  Route.get('/', ({ inertia }) => inertia.render('Home/Index')).as('login');
+  Route.post('/callback', 'AuthController.login').as('login.callback');
+  Route.get('/google', 'AuthController.googleRedirect').as('google');
+  Route.get('/facebook', 'AuthController.facebookRedirect').as('facebook');
+}).prefix('/login');
+
+Route.get('/register', ({ inertia }) => inertia.render('Home/Index')).as('register');
+Route.post('/register/callback', 'AuthController.register').as('register.callback');
 Route.get('/logout', 'AuthController.logout').as('logout');
 
 Route.group(() => {

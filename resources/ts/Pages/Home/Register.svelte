@@ -1,5 +1,5 @@
 <script>
-  import { inertia, page, useForm } from '@inertiajs/inertia-svelte';
+  import { page, useForm } from '@inertiajs/inertia-svelte';
   import { stardust } from '@eidellev/adonis-stardust';
   import FlashMessages from '../../Shared/FlashMessages.svelte';
   import TextInput from '../../Shared/Forms/TextInput.svelte';
@@ -8,21 +8,21 @@
   const form = useForm({
     email: '',
     password: '',
+    passwordConfirmation: '',
   });
 
   function submit() {
-    $form.post(stardust.route('login.callback'));
+    $form.post(stardust.route('register.callback'));
   }
 </script>
 
 <section>
   <form on:submit|preventDefault={submit}>
     <div class="flex items-start justify-between gap-5">
-      <h1>Vstup</h1>
-      <a href={stardust.route('register')} class="text-sm font-semibold text-gray-600 uppercase hover:text-blue-600">Ještě nemám účet</a>
-    </div>
+      <h1>Registrace</h1>
+      <a href={stardust.route('login')} class="text-sm font-semibold text-gray-600 uppercase hover:text-blue-600">Už mám účet</a>
 
-    <hr>
+    </div>
 
     <FlashMessages errors={$page.props.errors}/>
 
@@ -33,7 +33,7 @@
       placeholder="E-mail"
       required
       iconName="Mail"
-      error={$form.errors?.email?.join('<br>')}
+      error={$form.errors?.email}
     />
     <TextInput
       type="password"
@@ -42,11 +42,20 @@
       placeholder="Heslo"
       required
       iconName="Key"
-      error={$form.errors?.password?.join('<br>')}
+      error={$form.errors?.password}
+    />
+    <TextInput
+      type="password"
+      name="password-confirmation"
+      bind:value={$form.passwordConfirmation}
+      placeholder="Heslo znovu"
+      required
+      iconName="Key"
+      error={$form.errors?.passwordConfirmation}
     />
 
     <div class="flex justify-center">
-      <input type="submit" value="Přihlásit se" class="btn-blue">
+      <input type="submit" value="Vytvořit účet" class="btn-blue">
     </div>
 
     <hr>
