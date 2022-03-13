@@ -13,21 +13,28 @@ export default class DashboardController {
 
     await auth.user?.load('subjects', (query) => query.orderBy('name'));
     await auth.user?.load('timetables', (query) =>
-      query
-        .where('name', 'like', `%${filter}%`)
-        .preload('lessons')
-        .preload('owner')
-        .orderBy(settings.sortBy)
+      query.where('name', 'like', `%${filter}%`).preload('lessons').preload('owner')
+    );
+    await auth.user?.load('sharedTimetables', (query) =>
+      query.where('name', 'like', `%${filter}%`).preload('lessons').preload('owner')
     );
 
-    return inertia.render('Dashboard/Index', {
-      subjects: auth.user?.subjects,
-      timetables: auth.user?.timetables.filter((t) => {
+    let timetables = auth.user?.allTimetables
+      .sort((a, b) => {
+        if (a[settings.sortBy] < b[settings.sortBy]) return -1;
+        if (a[settings.sortBy] > b[settings.sortBy]) return 1;
+        return 0;
+      })
+      .filter((t) => {
         if (!settings.showInvalid && !t.isValid) return false;
         if (!settings.showOwned && t.owner.id === auth.user?.id) return false;
         if (!settings.showShared && t.owner.id !== auth.user?.id) return false;
         return true;
-      }),
+      });
+
+    return inertia.render('Dashboard/Index', {
+      subjects: auth.user?.subjects,
+      timetables,
       settings,
     });
   }

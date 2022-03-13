@@ -16,7 +16,7 @@
     labels={['Název', 'Datum']}
     iconNames={['Tag', 'Calendar']}
     ids={['name', 'date']}
-    values={['name', 'valid_to']}
+    values={['name', 'validTo']}
     bind:checked={settings.sortBy}
   />
 </section>
