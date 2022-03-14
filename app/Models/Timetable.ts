@@ -52,14 +52,14 @@ export default class Timetable extends BaseModel {
 
   @computed()
   public get minPeriod() {
-    for (const lesson of this.lessons) if (lesson.period === 0) return 0;
+    for (const lesson of this.lessons ?? []) if (lesson.period === 0) return 0;
     return 1;
   }
 
   @computed()
   public get maxPeriod() {
     let max = 0;
-    for (const lesson of this.lessons) max = Math.max(max, lesson.period);
+    for (const lesson of this.lessons ?? []) max = Math.max(max, lesson.period);
     return max;
   }
 
