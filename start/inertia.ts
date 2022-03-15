@@ -12,10 +12,10 @@ import Inertia from '@ioc:EidelLev/Inertia';
 
 Inertia.share({
   errors: (ctx) => {
-    return ctx.session.flashMessages.get('errors');
+    return ctx.session.flashMessages.get('errors') ?? [];
   },
   messages: (ctx) => {
-    return ctx.session.flashMessages.get('messages') || [];
+    return ctx.session.flashMessages.get('messages') ?? [];
   },
   user: (ctx) => {
     return ctx.auth?.user;
