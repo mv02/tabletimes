@@ -41,5 +41,8 @@ Route.group(() => {
 
   Route.resource('subjects', 'SubjectsController').except(['index', 'show']);
   Route.resource('timetables', 'TimetablesController').except(['index']);
+  Route.get('/timetables/:id/share', 'TimetablesController.shareForm').as('timetables.shareForm');
+  Route.post('/timetables/:id/share', 'TimetablesController.share').as('timetables.share');
+  Route.delete('/timetables/:id/unshare', 'TimetablesController.unshare').as('timetables.unshare');
   Route.resource('lessons', 'LessonsController').only(['store', 'update', 'destroy']);
 }).middleware('auth');

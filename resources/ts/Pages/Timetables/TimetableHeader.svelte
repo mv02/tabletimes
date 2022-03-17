@@ -51,18 +51,18 @@
 {/if}
 
 <div class="flex gap-3">
-  <a use:inertia href="/" class="flex items-center gap-2 px-4 btn-gray">
+  <a use:inertia href={stardust.route('timetables.shareForm', { id: timetable.id })} class="flex items-center px-4 gap-2 btn-gray">
     <ShareIcon className="w-5 h-5"/>
     <span>Sdílet</span>
   </a>
 
   {#if stardust.isCurrent('timetables.edit')}
-    <button form="edit-form" class="flex items-center gap-2 px-4 btn-green">
+    <button form="edit-form" class="flex items-center px-4 gap-2 btn-green">
       <CheckCircleIcon className="w-5 h-5"/>
       <span>Uložit</span>
     </button>
   {:else}
-    <a use:inertia href={stardust.route('timetables.edit', { id: timetable.id })} class="flex items-center gap-2 px-4 btn-blue">
+    <a use:inertia href={stardust.route('timetables.edit', { id: timetable.id })} class="flex items-center px-4 gap-2 btn-blue">
       <PencilIcon className="w-5 h-5"/>
       <span>Upravit</span>
     </a>

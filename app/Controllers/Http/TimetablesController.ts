@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import { DateTime } from 'luxon';
 import Timetable from 'App/Models/Timetable';
+import User from 'App/Models/User';
 
 export default class TimetablesController {
   public async create({ inertia }: HttpContextContract) {
@@ -56,7 +57,7 @@ export default class TimetablesController {
     return await inertia.render('Timetables/Edit', { timetable: timetable, subjects: subjects });
   }
 
-  public async update({ bouncer, request, response }: HttpContextContract) {
+  public async update({ bouncer, request, response, session }: HttpContextContract) {
     const timetable = await Timetable.findOrFail(request.param('id'));
     await bouncer.with('TimetablePolicy').authorize('update', timetable);
 
@@ -65,4 +66,42 @@ export default class TimetablesController {
   }
 
   public async destroy({}: HttpContextContract) {}
+
+  public async shareForm({ bouncer, inertia, request }: HttpContextContract) {
+    const timetable = await Timetable.findOrFail(request.param('id'));
+    await bouncer.with('TimetablePolicy').authorize('update', timetable);
+    await timetable.load('usersWithAccess');
+
+    return await inertia.render('Timetables/Share', { timetable });
+  }
+
+  public async share({ auth, bouncer, response, request, session }: HttpContextContract) {
+    if (request.input('email') === auth.user?.email) return response.redirect().back();
+
+    const timetable = await Timetable.findOrFail(request.param('id'));
+    await bouncer.with('TimetablePolicy').authorize('update', timetable);
+    await timetable.load('usersWithAccess');
+
+    try {
+      const user = await User.findByOrFail('email', request.input('email'));
+      if (!timetable.usersWithAccess.map((u) => u.id).includes(user.id))
+        await timetable.related('usersWithAccess').attach([user.id]);
+
+      session.flash({ messages: ['Přístupová práva změněna.'] });
+    } catch {
+      session.flash({ errors: ['Účet s touto e-mailovou adresou neexistuje.'] });
+    }
+
+    return response.redirect().back();
+  }
+
+  public async unshare({ bouncer, request, response, session }: HttpContextContract) {
+    const timetable = await Timetable.findOrFail(request.param('id'));
+    await bouncer.with('TimetablePolicy').authorize('update', timetable);
+
+    await timetable.related('usersWithAccess').detach([request.input('userId')]);
+    session.flash({ messages: ['Uživatel odstraněn.'] });
+
+    return response.redirect().back();
+  }
 }
