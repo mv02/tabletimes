@@ -24,7 +24,7 @@ export default class TimetablesController {
         ownerId: auth.user?.id,
       });
 
-      session.flash({ messages: ['Rozvrh byl úspěšně vytvořen.'] });
+      session.flash({ messages: [`Rozvrh ${timetable.name} vytvořen.`] });
     } catch {
       session.flash({ errors: ['Při vytváření rozvrhu došlo k chybě.'] });
     }
@@ -62,6 +62,8 @@ export default class TimetablesController {
     await bouncer.with('TimetablePolicy').authorize('update', timetable);
 
     await timetable.merge(request.all()).save();
+    session.flash({ messages: [`Rozvrh ${timetable.name} upraven.`] });
+
     return response.redirect().back();
   }
 

@@ -22,6 +22,8 @@
     </a>
   </div>
 
+  <FlashMessages errors={$page.props.errors} messages={$page.props.messages}/>
+
   <ul class="flex flex-col overflow-y-auto md:px-1 gap-1">
     {#each subjects as subject}
       <SubjectsListItem {subject}/>
