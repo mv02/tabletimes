@@ -41,7 +41,7 @@
     "@eidellev/adonis-stardust": "^2.1.0",
     "@eidellev/inertia-adonisjs": "^4.2.2",
     "@inertiajs/inertia": "^0.10.1",
-    "@inertiajs/inertia-svelte": "^0.7.4",
+    "@inertiajs/inertia-svelte": "^0.8.0",
     "luxon": "^2.0.2",
     "mysql": "^2.18.1",
     "pg": "^8.7.1",
