@@ -67,7 +67,15 @@ export default class TimetablesController {
     return response.redirect().back();
   }
 
-  public async destroy({}: HttpContextContract) {}
+  public async destroy({ bouncer, request, response, session }: HttpContextContract) {
+    const timetable = await Timetable.findOrFail(request.param('id'));
+    await bouncer.with('TimetablePolicy').authorize('delete', timetable);
+
+    await timetable.delete();
+    session.flash({ messages: [`Rozvrh ${timetable.name} odstraněn.`] });
+
+    return response.redirect().back();
+  }
 
   public async shareForm({ bouncer, inertia, request }: HttpContextContract) {
     const timetable = await Timetable.findOrFail(request.param('id'));

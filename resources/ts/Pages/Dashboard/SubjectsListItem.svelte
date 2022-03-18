@@ -1,9 +1,16 @@
 <script>
+  import { Inertia } from '@inertiajs/inertia';
   import { inertia } from '@inertiajs/inertia-svelte';
   import { stardust } from '@eidellev/adonis-stardust';
   import PencilIcon from '../../Shared/Icons/PencilIcon.svelte';
   import TrashIcon from '../../Shared/Icons/TrashIcon.svelte';
   export let subject;
+
+  function deleteSubject() {
+    Inertia.delete(stardust.route('subjects.destroy', { id: subject.id }), {
+      onBefore: () => confirm(`Opravdu odstranit předmět ${subject.name.toLowerCase()}?\nVšechny jeho hodiny budou smazány.`),
+    });
+  }
 </script>
 
 <li class="flex font-semibold bg-gray-200 rounded-md group">
@@ -18,7 +25,7 @@
       <PencilIcon className="w-5 h-5"/>
     </a>
 
-    <button class="hover:text-red-500" title="Odstranit předmět">
+    <button on:click={deleteSubject} class="hover:text-red-500" title="Odstranit předmět">
       <TrashIcon className="w-5 h-5"/>
     </button>
   </div>

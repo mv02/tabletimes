@@ -51,11 +51,13 @@ export default class SubjectsController {
     return await response.redirect().toRoute('dashboard');
   }
 
-  public async destroy({ bouncer, request, response }: HttpContextContract) {
+  public async destroy({ bouncer, request, response, session }: HttpContextContract) {
     const subject = await Subject.findOrFail(request.param('id'));
     await bouncer.with('SubjectPolicy').authorize('delete', subject);
 
     await subject.delete();
+
+    session.flash({ messages: [`Předmět ${subject.name.toLowerCase()} odstraněn.`] });
     return await response.redirect().back();
   }
 }

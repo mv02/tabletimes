@@ -1,4 +1,5 @@
 <script>
+  import { Inertia } from '@inertiajs/inertia';
   import { inertia, page } from '@inertiajs/inertia-svelte';
   import { stardust } from '@eidellev/adonis-stardust';
   import CalendarIcon from '../../Shared/Icons/CalendarIcon.svelte';
@@ -7,6 +8,12 @@
   import ShareIcon from '../../Shared/Icons/ShareIcon.svelte';
   import TrashIcon from '../../Shared/Icons/TrashIcon.svelte';
   export let timetable;
+
+  function deleteTimetable() {
+    Inertia.delete(stardust.route('timetables.destroy', { id: timetable.id }), {
+      onBefore: () => confirm(`Opravdu odstranit rozvrh "${timetable.name}"?`),
+    });
+  }
 </script>
 
 <li class="relative flex flex-col w-full bg-white cursor-pointer rounded-md group md:w-auto">
@@ -51,7 +58,7 @@
         <PencilIcon className="w-5 h-5"/>
       </a>
 
-      <button class="hover:text-red-500" title="Odstranit rozvrh">
+      <button on:click={deleteTimetable} class="hover:text-red-500" title="Odstranit rozvrh">
         <TrashIcon className="w-5 h-5"/>
       </button>
     </div>
