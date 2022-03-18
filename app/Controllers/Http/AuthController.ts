@@ -15,13 +15,14 @@ export default class AuthController {
     }
   }
 
-  public async register(ctx: HttpContextContract) {
-    await ctx.request.validate(RegisterValidator);
-    await this.loginOrCreateUser(ctx, {
-      email: ctx.request.input('email'),
-      password: ctx.request.input('password'),
+  public async register({ auth, request, response }: HttpContextContract) {
+    await request.validate(RegisterValidator);
+    const user = await User.create({
+      email: request.input('email'),
+      password: request.input('password'),
     });
-    return ctx.response.redirect().toRoute('dashboard');
+    await auth.login(user);
+    return response.redirect().toRoute('dashboard');
   }
 
   public async googleRedirect({ ally }: HttpContextContract) {
