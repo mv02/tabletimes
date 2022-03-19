@@ -11,7 +11,7 @@
 <section on:change>
   <h1>Filtr</h1>
 
-  <TextInput on:keyup bind:value={filter} placeholder="Lorem ipsum" maxlength="30" autofocus autocomplete="off"/>
+  <TextInput on:keyup bind:value={filter} placeholder="Lorem ipsum" maxlength="30" autocomplete="off"/>
 
   <div class="flex flex-col flex-wrap lg:flex-row gap-2">
     <Checkbox label="Neplatné rozvrhy" name="show-invalid" bind:checked={settings.showInvalid}/>
