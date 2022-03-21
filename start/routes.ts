@@ -46,3 +46,5 @@ Route.group(() => {
   Route.delete('/timetables/:id/unshare', 'TimetablesController.unshare').as('timetables.unshare');
   Route.resource('lessons', 'LessonsController').only(['store', 'update', 'destroy']);
 }).middleware('auth');
+
+Route.get(':code', 'TimetablesController.findByCode');

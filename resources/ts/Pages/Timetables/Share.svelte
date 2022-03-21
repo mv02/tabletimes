@@ -6,7 +6,9 @@
   import ShareItem from './ShareItem.svelte';
   import TextInput from '../../Shared/Forms/TextInput.svelte';
   import RadioInput from '../../Shared/Forms/RadioInput.svelte';
+  import DuplicateIcon from '../../Shared/Icons/DuplicateIcon.svelte';
   export let timetable;
+  export let url;
 
   const form1 = useForm({ isPublic: Boolean(timetable.is_public) });
   const form2 = useForm({ email: '' });
@@ -16,6 +18,10 @@
     if ($form2.isDirty) $form2.post(stardust.route('timetables.share', { id: timetable.id }), {
       onSuccess: () => $form2.reset(),
     });
+  }
+
+  function copyToClipboard() {
+    navigator.clipboard.writeText(`${url}/${timetable.share_code}`);
   }
 </script>
 
@@ -58,6 +64,17 @@
         <input type="submit" value="Uložit" class="btn-blue">
       </div>
     </form>
+
+    <hr>
+
+    <h1>Odkaz pro sdílení</h1>
+
+    <p on:click={copyToClipboard} class="flex items-center text-lg text-gray-600 cursor-pointer gap-2 group">
+      <span>{url}/{timetable.share_code}</span>
+      <button class="lg:opacity-0 lg:group-hover:opacity-100">
+        <DuplicateIcon className="w-5 h-5"/>
+      </button>
+    </p>
   </section>
 
   <section>

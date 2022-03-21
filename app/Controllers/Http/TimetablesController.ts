@@ -1,4 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
+import Env from '@ioc:Adonis/Core/Env';
+import { string } from '@ioc:Adonis/Core/Helpers';
 import { DateTime } from 'luxon';
 import Timetable from 'App/Models/Timetable';
 import User from 'App/Models/User';
@@ -19,6 +21,7 @@ export default class TimetablesController {
       timetable = await Timetable.create({
         name: request.input('name'),
         isPublic: request.input('isPublic'),
+        shareCode: string.generateRandom(6),
         validFrom: request.input('validFrom'),
         validTo: request.input('validTo'),
         ownerId: auth.user?.id,
@@ -42,6 +45,12 @@ export default class TimetablesController {
     timetable.can.update = await bouncer.with('TimetablePolicy').allows('update', timetable);
 
     return await inertia.render('Timetables/Index', { timetable: timetable });
+  }
+
+  public async findByCode({ request, response }: HttpContextContract) {
+    const timetable = await Timetable.findByOrFail('shareCode', request.param('code'));
+
+    return response.redirect().toRoute('timetables.show', { id: timetable.id });
   }
 
   public async edit({ auth, bouncer, inertia, request }: HttpContextContract) {
@@ -83,7 +92,7 @@ export default class TimetablesController {
     await bouncer.with('TimetablePolicy').authorize('update', timetable);
     await timetable.load('usersWithAccess');
 
-    return await inertia.render('Timetables/Share', { timetable });
+    return await inertia.render('Timetables/Share', { timetable, url: Env.get('APP_URL') });
   }
 
   public async share({ auth, bouncer, response, request, session }: HttpContextContract) {
