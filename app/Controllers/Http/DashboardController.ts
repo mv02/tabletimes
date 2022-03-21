@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 
 export default class DashboardController {
-  public async index({ auth, inertia, request }: HttpContextContract) {
+  public async index({ auth, bouncer, inertia, request }: HttpContextContract) {
     const filter = request.input('filter') ?? '';
 
     const settings = request.cookie('settings', {
@@ -19,7 +19,7 @@ export default class DashboardController {
       query.where('name', 'like', `%${filter}%`).preload('lessons').preload('owner')
     );
 
-    let timetables = auth.user?.allTimetables
+    const timetables = auth.user?.allTimetables
       .sort((a, b) => {
         if (a[settings.sortBy] < b[settings.sortBy]) return -1;
         if (a[settings.sortBy] > b[settings.sortBy]) return 1;
@@ -31,6 +31,9 @@ export default class DashboardController {
         if (!settings.showShared && t.owner.id !== auth.user?.id) return false;
         return true;
       });
+
+    for (const t of timetables ?? [])
+      t.can.update = await bouncer.with('TimetablePolicy').allows('update', t);
 
     return inertia.render('Dashboard/Index', {
       subjects: auth.user?.subjects,

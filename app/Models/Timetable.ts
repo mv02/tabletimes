@@ -67,4 +67,7 @@ export default class Timetable extends BaseModel {
   public get isValid() {
     return this.validFrom <= DateTime.now() && this.validTo >= DateTime.now();
   }
+
+  @computed()
+  public can: { view?: boolean; update?: boolean; delete?: boolean } = {};
 }

@@ -48,19 +48,21 @@
       </p>
     </div>
 
-    <div class="z-10 flex items-center gap-2 lg:opacity-0 lg:group-hover:opacity-100">
-      <a
-        use:inertia
-        href={stardust.route('timetables.edit', { id: timetable.id })}
-        class="hover:text-purple-600"
-        title="Upravit rozvrh"
-      >
-        <PencilIcon className="w-5 h-5"/>
-      </a>
+    {#if timetable.can.update}
+      <div class="z-10 flex items-center gap-2 lg:opacity-0 lg:group-hover:opacity-100">
+        <a
+          use:inertia
+          href={stardust.route('timetables.edit', { id: timetable.id })}
+          class="hover:text-purple-600"
+          title="Upravit rozvrh"
+        >
+          <PencilIcon className="w-5 h-5"/>
+        </a>
 
-      <button on:click={deleteTimetable} class="hover:text-red-500" title="Odstranit rozvrh">
-        <TrashIcon className="w-5 h-5"/>
-      </button>
-    </div>
+        <button on:click={deleteTimetable} class="hover:text-red-500" title="Odstranit rozvrh">
+          <TrashIcon className="w-5 h-5"/>
+        </button>
+      </div>
+    {/if}
   </div>
 </li>

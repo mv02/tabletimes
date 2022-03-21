@@ -39,6 +39,7 @@ export default class TimetablesController {
     });
     await timetable.load('owner');
     await bouncer.with('TimetablePolicy').authorize('view', timetable);
+    timetable.can.update = await bouncer.with('TimetablePolicy').allows('update', timetable);
 
     return await inertia.render('Timetables/Index', { timetable: timetable });
   }
