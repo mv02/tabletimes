@@ -1,4 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
+import User from 'App/Models/User';
 
 export default class DashboardController {
   public async index({ auth, bouncer, inertia, request }: HttpContextContract) {
@@ -42,7 +43,16 @@ export default class DashboardController {
     });
   }
 
-  public async saveSettings({ request, response }: HttpContextContract) {
-    response.cookie('settings', request.input('settings'));
+  public async saveSettings({ auth, request, response }: HttpContextContract) {
+    if (request.input('settings')) response.cookie('settings', request.input('settings'));
+    else {
+      await auth.user
+        ?.merge({
+          firstName: request.input('firstName'),
+          lastName: request.input('lastName'),
+        })
+        .save();
+      return response.redirect().back();
+    }
   }
 }
