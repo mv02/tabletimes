@@ -3,6 +3,10 @@ import User from 'App/Models/User';
 import Timetable from 'App/Models/Timetable';
 
 export default class TimetablePolicy extends BasePolicy {
+  public async before(user: User) {
+    if (user.isAdmin) return true;
+  }
+
   public async view(user: User, timetable: Timetable) {
     await timetable.load('usersWithAccess');
     return (

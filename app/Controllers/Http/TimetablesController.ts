@@ -3,6 +3,7 @@ import Env from '@ioc:Adonis/Core/Env';
 import { string } from '@ioc:Adonis/Core/Helpers';
 import { DateTime } from 'luxon';
 import Timetable from 'App/Models/Timetable';
+import Subject from 'App/Models/Subject';
 import User from 'App/Models/User';
 
 export default class TimetablesController {
@@ -62,7 +63,9 @@ export default class TimetablesController {
     await bouncer.with('TimetablePolicy').authorize('update', timetable);
 
     await auth.user?.load('subjects', (query) => query.orderBy('name'));
-    const subjects = auth.user?.subjects;
+    const subjects = auth.user?.isAdmin
+      ? await Subject.query().orderBy('name')
+      : auth.user?.subjects;
 
     return await inertia.render('Timetables/Edit', { timetable: timetable, subjects: subjects });
   }

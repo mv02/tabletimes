@@ -3,6 +3,10 @@ import User from 'App/Models/User';
 import Subject from 'App/Models/Subject';
 
 export default class SubjectPolicy extends BasePolicy {
+  public async before(user: User) {
+    if (user.isAdmin) return true;
+  }
+
   public async update(user: User, subject: Subject) {
     return subject.ownerId === user.id;
   }

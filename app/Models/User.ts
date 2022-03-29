@@ -29,6 +29,9 @@ export default class User extends BaseModel {
   @column()
   public lastName: string | null;
 
+  @column()
+  public isAdmin: boolean;
+
   @hasMany(() => Subject, { foreignKey: 'ownerId' })
   public subjects: HasMany<typeof Subject>;
 
