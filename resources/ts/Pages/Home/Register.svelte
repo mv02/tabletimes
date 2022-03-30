@@ -20,8 +20,12 @@
   <form on:submit|preventDefault={submit}>
     <div class="flex items-start justify-between gap-5">
       <h1>Registrace</h1>
-      <a href={stardust.route('login')} class="text-sm font-semibold text-gray-600 uppercase hover:text-blue-600">Už mám účet</a>
-
+      <a
+        href={stardust.route('login')}
+        class="text-sm font-semibold text-gray-600 uppercase hover:text-blue-600"
+      >
+        Už mám účet
+      </a>
     </div>
 
     <FlashMessages errors={$page.props.errors}/>
@@ -35,6 +39,7 @@
       iconName="Mail"
       error={$form.errors?.email}
     />
+
     <TextInput
       type="password"
       name="password"
@@ -44,6 +49,7 @@
       iconName="Key"
       error={$form.errors?.password}
     />
+
     <TextInput
       type="password"
       name="password-confirmation"

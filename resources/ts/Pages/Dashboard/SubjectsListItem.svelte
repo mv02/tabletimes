@@ -8,7 +8,9 @@
 
   function deleteSubject() {
     Inertia.delete(stardust.route('subjects.destroy', { id: subject.id }), {
-      onBefore: () => confirm(`Opravdu odstranit předmět ${subject.name.toLowerCase()}?\nVšechny jeho hodiny budou smazány.`),
+      onBefore: () => confirm(
+        `Opravdu odstranit předmět ${subject.name.toLowerCase()}?\nVšechny jeho hodiny budou smazány.`
+      ),
     });
   }
 </script>
@@ -21,7 +23,12 @@
   </div>
 
   <div class="flex items-center p-2 text-gray-600 gap-2 lg:opacity-0 lg:group-hover:opacity-100">
-    <a use:inertia href={stardust.route('subjects.edit', { id: subject.id })} class="hover:text-purple-600" title="Upravit předmět">
+    <a
+      use:inertia
+      href={stardust.route('subjects.edit', { id: subject.id })}
+      class="hover:text-purple-600"
+      title="Upravit předmět"
+    >
       <PencilIcon className="w-5 h-5"/>
     </a>
 

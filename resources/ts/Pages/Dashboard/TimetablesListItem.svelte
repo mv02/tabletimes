@@ -30,7 +30,9 @@
     {/if}
   </div>
 
-  <div class="flex justify-between p-2 text-gray-600 bg-gray-200 gap-4 lg:text-gray-400 rounded-b-md lg:group-hover:text-gray-600">
+  <div 
+    class="flex justify-between p-2 text-gray-600 bg-gray-200 gap-4 lg:text-gray-400 rounded-b-md lg:group-hover:text-gray-600"
+  >
     <div class="flex gap-4">
       <p class="flex items-center gap-1">
         <ClockIcon className="w-5 h-5"/>

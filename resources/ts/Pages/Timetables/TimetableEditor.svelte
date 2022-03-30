@@ -26,8 +26,17 @@
 
 <form on:submit|preventDefault={submit} id="edit-form" class="justify-center md:flex-row">
   <div>
-    <TextInput label="Název" name="name" bind:value={$form.name} placeholder="Třída 3.B" maxlength="50" required autocomplete="off"/>
+    <TextInput
+      label="Název"
+      name="name"
+      bind:value={$form.name}
+      placeholder="Třída 3.B"
+      maxlength="50"
+      required
+      autocomplete="off"
+    />
   </div>
+
   <div class="flex flex-col gap-5 sm:flex-row">
     <DateInput label="Platný od" name="valid-from" bind:value={$form.validFrom} required/>
     <DateInput label="Platný do" name="valid-to" bind:value={$form.validTo} required/>

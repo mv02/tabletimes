@@ -22,9 +22,21 @@
   {:else}
     <section class="items-start bg-transparent">
       <p class="text-xl text-white">1) Přidej předměty.</p>
-      <img transition:fade={{ duration: 1500 }} src="/images/preview1.png" alt="Seznam předmětů" class="xl:h-12 xl:w-auto rounded-md">
+      <img
+        transition:fade={{ duration: 1500 }}
+        src="/images/preview1.png"
+        alt="Seznam předmětů"
+        class="xl:h-12 xl:w-auto rounded-md"
+      >
+
       <p class="text-xl text-white">2) Sestav rozvrh.</p>
-      <img transition:fade={{ duration: 1500 }} src="/images/preview2.png" alt="Ukázka rozvrhu" class="xl:h-12 xl:w-auto rounded-md">
+      <img
+        transition:fade={{ duration: 1500 }}
+        src="/images/preview2.png"
+        alt="Ukázka rozvrhu"
+        class="xl:h-12 xl:w-auto rounded-md"
+      >
+
       <p class="text-xl text-white">3) Sdílej s ostatními.</p>
 
       <hr class="w-full">

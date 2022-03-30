@@ -32,7 +32,15 @@
 
       <div class="flex flex-col gap-5 sm:flex-row">
         <div class="flex flex-col flex-grow gap-5">
-          <TextInput label="Název" name="name" bind:value={$form.name} placeholder="Třída 3.B" maxlength="50" required autocomplete="off"/>
+          <TextInput
+            label="Název"
+            name="name"
+            bind:value={$form.name}
+            placeholder="Třída 3.B"
+            maxlength="50"
+            required
+            autocomplete="off"
+          />
           <RadioInput
             label="Viditelnost"
             name="is-public"
@@ -53,7 +61,7 @@
       <hr>
 
       <div class="flex justify-center">
-        <input type="submit" value="Uložit" class="w-1/2 p-2 font-semibold text-white bg-blue-600 cursor-pointer rounded-md sm:w-1/4 hover:bg-purple-800">
+        <input type="submit" value="Uložit" class="btn-blue">
       </div>
     </form>
   </section>

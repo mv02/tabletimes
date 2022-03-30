@@ -31,14 +31,33 @@
 
       <hr>
 
-      <TextInput label="Název" name="name" bind:value={$form.name} placeholder="Český jazyk a literatura" maxlength="30" required autocomplete="off"/>
+      <TextInput
+        label="Název"
+        name="name"
+        bind:value={$form.name}
+        placeholder="Český jazyk a literatura"
+        maxlength="30"
+        required
+        autocomplete="off"
+      />
+
       <div class="flex gap-5">
-        <TextInput label="Zkratka" name="short" bind:value={$form.short} placeholder="čjl" size="5" maxlength="10" required autocomplete="off" iconName="Tag"/>
+        <TextInput
+          label="Zkratka"
+          name="short"
+          bind:value={$form.short}
+          placeholder="čjl"
+          size="5"
+          maxlength="10"
+          required
+          autocomplete="off"
+          iconName="Tag"
+        />
         <ColorInput label="Barva" name="color" bind:value={$form.color} required/>
       </div>
 
       <div class="flex justify-center">
-        <input type="submit" value="Uložit" class="w-1/2 btn-blue">
+        <input type="submit" value="Uložit" class="btn-blue">
       </div>
     </form>
   </section>

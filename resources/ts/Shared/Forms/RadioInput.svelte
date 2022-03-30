@@ -25,7 +25,11 @@
   <div on:change class="flex text-gray-400 bg-gray-200 rounded-md text-md">
     {#each options as option, i}
       <input type="radio" {name} id={option.id} value={option.value} bind:group={checked} class="hidden">
-      <label for={option.id} class="flex items-center justify-center flex-grow py-2 cursor-pointer gap-2 {i === 0 ? 'rounded-l-md' : ''} {i === options.length - 1 ? 'rounded-r-md' : ''}">
+      <label
+        for={option.id}
+        class="flex items-center justify-center flex-grow py-2 cursor-pointer gap-2
+          {i === 0 ? 'rounded-l-md' : ''} {i === options.length - 1 ? 'rounded-r-md' : ''}"
+      >
         <svelte:component this={option.icon} className="w-5 h-5"/>
         <span>{option.label}</span>
       </label>

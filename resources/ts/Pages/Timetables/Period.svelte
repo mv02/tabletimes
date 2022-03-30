@@ -57,13 +57,19 @@
   on:dragover|preventDefault={handleDragOver}
   on:dragleave={handleDragLeave}
   on:drop={handleDrop}
-  class="flex flex-col gap-1 px-0.5 py-1 md:py-1.5 bg-opacity-10 {isEven && stardust.isCurrent('timetables.edit') ? 'bg-white' : ''}"
+  class="flex flex-col gap-1 px-0.5 py-1 md:py-1.5 bg-opacity-10
+    {isEven && stardust.isCurrent('timetables.edit') ? 'bg-white' : ''}"
   data-day={day}
   data-period={period}
 >
   {#each lessons as lesson}
-    <Lesson {lesson} bind:selectedLesson className={$draggedItem && !lessons.includes($draggedItem) ? 'pointer-events-none' : ''}/>
+    <Lesson
+      {lesson}
+      bind:selectedLesson
+      className={$draggedItem && !lessons.includes($draggedItem) ? 'pointer-events-none' : null}
+    />
   {/each}
+
   {#if preview}
     <Lesson lesson={preview} className="opacity-50 pointer-events-none"/>
   {/if}

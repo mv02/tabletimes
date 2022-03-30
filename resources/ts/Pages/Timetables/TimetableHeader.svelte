@@ -32,7 +32,14 @@
 
 {#if stardust.isCurrent('timetables.edit')}
   <div class="flex flex-col items-center gap-2 lg:items-end lg:gap-8 lg:flex-row">
-    <RangeInput label="Počet hodin" name="period-count" bind:value={$periodCount} min={Math.max(maxPeriod, 6)} max="12" iconName="Clock">
+    <RangeInput
+      label="Počet hodin"
+      name="period-count"
+      bind:value={$periodCount}
+      min={Math.max(maxPeriod, 6)}
+      max="12"
+      iconName="Clock"
+    >
       <span class="font-semibold">{$periodCount}</span>
     </RangeInput>
     <Checkbox label="0. hodina" name="period-zero" bind:checked={$periodZero} disabled={minPeriod == 0}/>
@@ -41,18 +48,27 @@
   <div class="flex flex-col text-gray-600">
     <div class="flex items-center gap-2">
       <UserCircleIcon className="w-6 h-6" />
-      <a href="mailto:{timetable.owner.email}">{timetable.owner.fullName ? timetable.owner.fullName : timetable.owner.email}</a>
+      <a href="mailto:{timetable.owner.email}">
+        {timetable.owner.fullName ? timetable.owner.fullName : timetable.owner.email}
+      </a>
     </div>
     <div class="flex items-center gap-2 {!timetable.isValid ? 'text-red-500 font-bold' : ''}">
       <CalendarIcon className="w-6 h-6" />
-      <span>{new Date(timetable.valid_from).toLocaleDateString('cs-CZ')} - {new Date(timetable.valid_to).toLocaleDateString('cs-CZ')}</span>
+      <span>
+        {new Date(timetable.valid_from).toLocaleDateString('cs-CZ')} -
+        {new Date(timetable.valid_to).toLocaleDateString('cs-CZ')}
+      </span>
     </div>
   </div>
 {/if}
 
 <div class="flex gap-3">
   {#if timetable.can.update || stardust.isCurrent('timetables.edit')}
-    <a use:inertia href={stardust.route('timetables.shareForm', { id: timetable.id })} class="flex items-center px-4 gap-2 btn-gray">
+    <a
+      use:inertia
+      href={stardust.route('timetables.shareForm', { id: timetable.id })}
+      class="flex items-center px-4 gap-2 btn-gray"
+    >
       <ShareIcon className="w-5 h-5"/>
       <span>Sdílet</span>
     </a>
@@ -64,7 +80,11 @@
       <span>Uložit</span>
     </button>
   {:else if timetable.can.update}
-    <a use:inertia href={stardust.route('timetables.edit', { id: timetable.id })} class="flex items-center px-4 gap-2 btn-blue">
+    <a
+      use:inertia
+      href={stardust.route('timetables.edit', { id: timetable.id })}
+      class="flex items-center px-4 gap-2 btn-blue"
+    >
       <PencilIcon className="w-5 h-5"/>
       <span>Upravit</span>
     </a>

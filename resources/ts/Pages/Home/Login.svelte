@@ -19,7 +19,12 @@
   <form on:submit|preventDefault={submit}>
     <div class="flex items-start justify-between gap-5">
       <h1>Vstup</h1>
-      <a href={stardust.route('register')} class="text-sm font-semibold text-gray-600 uppercase hover:text-blue-600">Ještě nemám účet</a>
+      <a
+        href={stardust.route('register')}
+        class="text-sm font-semibold text-gray-600 uppercase hover:text-blue-600"
+      >
+        Ještě nemám účet
+      </a>
     </div>
 
     <hr>
@@ -35,6 +40,7 @@
       iconName="Mail"
       error={$form.errors?.email?.join('<br>')}
     />
+
     <TextInput
       type="password"
       name="password"
