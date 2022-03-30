@@ -14,7 +14,10 @@
   });
 
   function submit() {
-    if (stardust.isCurrent('subjects.create')) $form.post(stardust.route('subjects.store'));
+    if (stardust.isCurrent('subjects.create'))
+      $form.post(stardust.route('subjects.store'), {
+        onSuccess: () => $form.reset(),
+      });
     else $form.patch(stardust.route('subjects.update', { id: subject.id }));
   }
 </script>
