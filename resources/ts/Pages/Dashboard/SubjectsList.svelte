@@ -24,12 +24,12 @@
 
   <FlashMessages errors={$page.props.errors} messages={$page.props.messages}/>
 
-  <ul class="flex flex-col overflow-y-auto md:px-1 gap-1">
-    {#each subjects as subject}
-      <SubjectsListItem {subject}/>
-    {/each}
+  {#if subjects.length > 0}
+    <ul class="flex flex-col overflow-y-auto md:px-1 gap-1">
+      {#each subjects as subject}
+        <SubjectsListItem {subject}/>
+      {/each}
 
-    {#if subjects.length > 0}
       <a
         use:inertia
         href={stardust.route('subjects.create')}
@@ -38,6 +38,6 @@
       >
         <PlusIcon className="w-6 h-6"/>
       </a>
-    {/if}
-  </ul>
+    </ul>
+  {/if}
 </section>
