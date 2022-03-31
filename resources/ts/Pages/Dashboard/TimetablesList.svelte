@@ -19,6 +19,7 @@
     <a
       use:inertia
       href={stardust.route('timetables.create')}
+      title="Nový rozvrh"
       class="flex justify-center p-2 bg-white rounded-md hover:text-white hover:bg-purple-600"
     >
       <PlusIcon className="w-6 h-6"/>

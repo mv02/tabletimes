@@ -46,6 +46,7 @@
     {#if !editing}
       <button
         on:click={() => editing = true}
+        title="Upravit jméno"
         class="hover:text-purple-600"
       >
         <PencilIcon className="w-5 h-5"/>
@@ -53,6 +54,7 @@
     {:else}
       <button
         form="settings-form"
+        title="Uložit jméno"
         class="hover:text-green-500"
       >
         <CheckCircleIcon className="w-5 h-5"/>
