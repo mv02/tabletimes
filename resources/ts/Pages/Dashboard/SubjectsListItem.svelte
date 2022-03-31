@@ -1,6 +1,6 @@
 <script>
   import { Inertia } from '@inertiajs/inertia';
-  import { inertia } from '@inertiajs/inertia-svelte';
+  import { inertia, page } from '@inertiajs/inertia-svelte';
   import { stardust } from '@eidellev/adonis-stardust';
   import PencilIcon from '../../Shared/Icons/PencilIcon.svelte';
   import TrashIcon from '../../Shared/Icons/TrashIcon.svelte';
@@ -20,6 +20,14 @@
   <div class="flex-grow p-2">
     <span>{subject.name}</span>
     <span class="ml-1 text-sm text-gray-400">{subject.short}</span>
+    {#if $page.props.user.is_admin && subject.owner.id !== $page.props.user.id}
+      <a
+        href="mailto:{subject.owner.email}"
+        class="ml-1 text-xs font-normal text-gray-600 hover:text-blue-600"
+      >
+        {subject.owner.email}
+      </a>
+    {/if}
   </div>
 
   <div class="flex items-center p-2 text-gray-600 gap-2 lg:opacity-0 lg:group-hover:opacity-100">

@@ -64,7 +64,7 @@ export default class TimetablesController {
 
     await auth.user?.load('subjects', (query) => query.orderBy('name'));
     const subjects = auth.user?.isAdmin
-      ? await Subject.query().orderBy('name')
+      ? await Subject.query().preload('owner').orderBy('name')
       : auth.user?.subjects;
 
     return await inertia.render('Timetables/Edit', { timetable: timetable, subjects: subjects });

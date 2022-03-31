@@ -1,6 +1,6 @@
 <script>
   import { Inertia } from '@inertiajs/inertia';
-  import { inertia } from '@inertiajs/inertia-svelte';
+  import { inertia, page } from '@inertiajs/inertia-svelte';
   import { stardust } from '@eidellev/adonis-stardust';
   import { fade } from 'svelte/transition';
   import { draggedItem } from './stores';
@@ -51,8 +51,13 @@
     >
       <div class="p-2 rounded-l-md" style="background-color: #{subject.color}"></div>
       <div class="flex-grow p-2">
-        <span>{subject.name}</span>
-        <span class="ml-1 text-sm text-gray-400">{subject.short}</span>
+        <div>
+          <span>{subject.name}</span>
+          <span class="ml-1 text-sm text-gray-400">{subject.short}</span>
+        </div>
+        {#if $page.props.user.is_admin && subject.owner.id !== $page.props.user.id}
+          <span class="text-xs font-normal text-gray-600">{subject.owner.email}</span>
+        {/if}
       </div>
     </li>
   {/each}

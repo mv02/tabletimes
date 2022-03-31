@@ -42,7 +42,9 @@ export default class DashboardController {
       t.can.update = await bouncer.with('TimetablePolicy').allows('update', t);
 
     return inertia.render('Dashboard/Index', {
-      subjects: auth.user?.isAdmin ? await Subject.query().orderBy('name') : auth.user?.subjects,
+      subjects: auth.user?.isAdmin
+        ? await Subject.query().preload('owner').orderBy('name')
+        : auth.user?.subjects,
       timetables,
       settings,
     });
