@@ -25,7 +25,9 @@
     {#if timetable.owner.id !== $page.props.user.id}
       <p class="flex items-center text-sm text-gray-600 gap-2">
         <ShareIcon className="w-4 h-4"/>
-        <span>{timetable.owner.fullName ?? timetable.owner.email}</span>
+        <span>
+          {timetable.owner.fullName ? `${timetable.owner.fullName} (${timetable.owner.email})` : timetable.owner.email}
+        </span>
       </p>
     {/if}
   </div>

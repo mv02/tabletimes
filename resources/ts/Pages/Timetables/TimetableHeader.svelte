@@ -48,8 +48,8 @@
   <div class="flex flex-col text-gray-600">
     <div class="flex items-center gap-2">
       <UserCircleIcon className="w-6 h-6" />
-      <a href="mailto:{timetable.owner.email}">
-        {timetable.owner.fullName ? timetable.owner.fullName : timetable.owner.email}
+      <a href="mailto:{timetable.owner.email}" title={timetable.owner.email} class="hover:text-blue-600">
+        {timetable.owner.fullName ?? timetable.owner.email}
       </a>
     </div>
     <div class="flex items-center gap-2 {!timetable.isValid ? 'text-red-500 font-bold' : ''}">
