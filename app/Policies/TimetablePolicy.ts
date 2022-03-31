@@ -1,18 +1,19 @@
-import { BasePolicy } from '@ioc:Adonis/Addons/Bouncer';
+import { action, BasePolicy } from '@ioc:Adonis/Addons/Bouncer';
 import User from 'App/Models/User';
 import Timetable from 'App/Models/Timetable';
 
 export default class TimetablePolicy extends BasePolicy {
-  public async before(user: User) {
-    if (user.isAdmin) return true;
+  public async before(user: User | null) {
+    if (user?.isAdmin) return true;
   }
 
-  public async view(user: User, timetable: Timetable) {
+  @action({ allowGuest: true })
+  public async view(user: User | null, timetable: Timetable) {
     await timetable.load('usersWithAccess');
     return (
-      timetable.ownerId === user.id ||
+      timetable.ownerId === user?.id ||
       Boolean(timetable.isPublic) ||
-      timetable.usersWithAccess.map((u) => u.id).includes(user.id)
+      timetable.usersWithAccess.map((u) => u.id).includes(user?.id as number)
     );
   }
 
