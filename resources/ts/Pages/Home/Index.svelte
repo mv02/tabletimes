@@ -6,7 +6,7 @@
   import Register from './Register.svelte';
 </script>
 
-<Layout class="flex flex-col items-center justify-around gap-5 xl:flex-row">
+<Layout class="flex flex-col items-center gap-5 xl:flex-row xl:justify-around">
 
   <a href="/">
     <section class="items-center bg-transparent">

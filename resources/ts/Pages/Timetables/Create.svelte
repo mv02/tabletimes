@@ -21,7 +21,7 @@
   }
 </script>
 
-<Layout class="flex items-center justify-center">
+<Layout class="flex flex-col sm:items-center sm:justify-center">
   <section>
     <form on:submit|preventDefault={submit}>
       <h1>Nový rozvrh</h1>
