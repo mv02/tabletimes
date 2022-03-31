@@ -24,3 +24,7 @@ form {
 h1 {
   @apply text-xl font-semibold uppercase;
 }
+
+input:-webkit-autofill {
+  @apply rounded-r-md;
+}
