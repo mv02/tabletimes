@@ -10,7 +10,7 @@
 
   <a href="/">
     <section class="items-center bg-transparent">
-      <img src="/images/logo.svg" alt="Timetables logo" class="h-40 xl:h-60">
+      <img src="/images/logo.png" alt="Timetables logo" class="h-40 xl:h-60">
       <p class="text-2xl text-white">Rozvrh hodin pro každého.</p>
     </section>
   </a>
