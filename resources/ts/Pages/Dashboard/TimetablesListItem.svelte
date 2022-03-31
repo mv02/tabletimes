@@ -4,6 +4,7 @@
   import { stardust } from '@eidellev/adonis-stardust';
   import CalendarIcon from '../../Shared/Icons/CalendarIcon.svelte';
   import ClockIcon from '../../Shared/Icons/ClockIcon.svelte';
+  import LockOpenIcon from '../../Shared/Icons/LockOpenIcon.svelte';
   import PencilIcon from '../../Shared/Icons/PencilIcon.svelte';
   import ShareIcon from '../../Shared/Icons/ShareIcon.svelte';
   import TrashIcon from '../../Shared/Icons/TrashIcon.svelte';
@@ -20,7 +21,12 @@
   <a use:inertia href={stardust.route('timetables.show', { id: timetable.id })} class="absolute w-full h-full"></a>
 
   <div class="flex flex-col p-2 gap-2">
-    <h2 class="text-lg font-semibold uppercase">{timetable.name}</h2>
+    <div class="flex items-center justify-between gap-5">
+      <h2 class="text-lg font-semibold uppercase">{timetable.name}</h2>
+      {#if timetable.is_public}
+        <LockOpenIcon className="w-5 h-5 text-gray-400"/>
+      {/if}
+    </div>
 
     {#if timetable.owner.id !== $page.props.user.id}
       <p class="flex items-center text-sm text-gray-600 gap-2">
