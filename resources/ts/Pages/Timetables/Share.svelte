@@ -61,7 +61,7 @@
       />
 
       <div class="flex justify-center">
-        <input type="submit" value="Uložit" class="btn-blue">
+        <input type="submit" value="Uložit" disabled={$form1.processing || $form2.processing} class="btn-blue">
       </div>
     </form>
 

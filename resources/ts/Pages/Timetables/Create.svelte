@@ -61,7 +61,7 @@
       <hr>
 
       <div class="flex justify-center">
-        <input type="submit" value="Uložit" class="btn-blue">
+        <input type="submit" value="Uložit" disabled={$form.processing} class="btn-blue">
       </div>
     </form>
   </section>
